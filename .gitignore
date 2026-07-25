@@ -1,0 +1,14 @@
+# Secrets and host-specific credentials
+*.key
+*.pem
+*.p12
+*.pfx
+*.age
+.env
+secrets/
+
+# Installation media and VM disks are inputs/artifacts, not setup source
+*.iso
+*.iso.sig
+*.qcow2
+*.raw
