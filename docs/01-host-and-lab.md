@@ -27,6 +27,8 @@ Installed host components:
 
 AMD SVM virtualization is enabled in firmware and `/dev/kvm` is present. The user account belongs to the `libvirt` group and can connect to `qemu:///system`.
 
+The persistent libvirt network named `default` is active and marked to autostart. It is the lab's NAT network.
+
 ## First lab VM: intended hardware
 
 | Virtual component | Choice | Why |
@@ -35,9 +37,20 @@ AMD SVM virtualization is enabled in firmware and `/dev/kvm` is present. The use
 | Memory | 8 GiB | Enough for a Wayland desktop, Zed, and browser-based development. |
 | Disk | 80 GiB qcow2 | Sparse, snapshot-capable, and large enough for the learning system. |
 | Firmware | UEFI/OVMF | Matches the physical machine's boot model. |
-| Display | Virtio GPU with 3D acceleration | Tests a modern virtual graphics path, not the physical RX 6600 XT driver. |
+| Display | Virtio GPU over SPICE | Uses the guest `virtio_gpu` driver; host-side 3D acceleration is deferred. |
 | Network | libvirt default NAT | Gives guest internet access without exposing it directly on the LAN. |
 
 ## Limits of this lab
 
 The VM will use `virtio_gpu`, not the host's `amdgpu` driver. It is appropriate for testing the base system, filesystem, boot configuration, Wayland, compositors, and desktop tooling. Validate RX 6600 XT-specific behavior—gaming, VRR, sleep/wake, multiple monitors, and hardware video acceleration—on the physical host later.
+
+## Actual first VM
+
+- **Name:** `arch-lab`
+- **Storage:** an 80 GiB sparse qcow2 image in libvirt's default storage pool
+- **Installer ISO:** `/var/lib/libvirt/images/archlinux-x86_64.iso`, verified before use
+- **State:** created and running from the Arch installer ISO
+
+### Deferred: 3D acceleration
+
+The intended configuration was SPICE OpenGL plus a 3D-accelerated Virtio GPU. QEMU 11.0.2 on this host rejected its SPICE video-codec configuration when OpenGL was enabled, despite the relevant SPICE and GStreamer packages being installed. The VM therefore currently uses 2D Virtio graphics. This does not change the guest driver (`virtio_gpu`); it limits accelerated rendering. Investigate this independently after the base VM is stable.
