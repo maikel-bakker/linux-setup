@@ -20,7 +20,7 @@ Develop an understandable, intentionally minimal, reproducible Arch Linux daily-
 Implemented inside the VM:
 
 - LUKS2 root with Btrfs subvolumes and systemd-boot: see `docs/02-storage-and-boot.md`.
-- NetworkManager, SSH, `sudo`, user `mb`, and root SSH login disabled.
+- NetworkManager, systemd-resolved, SSH, `sudo`, user `mb`, and root SSH login disabled.
 - zram swap and systemd-timesyncd: see `docs/03-core-services.md`.
 - Zsh, pinned Oh My Zsh, and pinned zsh-autosuggestions: see `docs/04-zsh.md`.
 - Node.js/npm manifest and user-local global npm tooling: see `docs/05-web-development.md`.
@@ -31,18 +31,24 @@ The physical host runs UFW with default-deny input/forward policy. The VM networ
 
 ## Current next action
 
-On the VM, pull the latest repository and install/authenticate Codex CLI:
+Codex CLI is installed in the VM with API-key authentication. Its resolver
+requires the standard `/etc/resolv.conf` link; the working VM configuration is
+now represented by `scripts/configure-systemd-resolved` and documented in
+`docs/03-core-services.md`.
+
+On a rebuild, install the CLI and configure DNS before using Codex:
 
 ```sh
 cd ~/Projects/linux-setup
 git pull
 ./scripts/install-global-npm-packages npm/global-packages.txt
+sudo ./scripts/configure-systemd-resolved
 exec zsh -l
 codex --version
-codex --login
+codex doctor --summary
 ```
 
-Authentication is interactive and must never be committed. The npm script installs into `~/.local`; the managed Zsh config adds `~/.local/bin` to `PATH`.
+Authentication is interactive and API keys must never be committed. The npm script installs into `~/.local`; the managed Zsh config adds `~/.local/bin` to `PATH`.
 
 ## How to continue
 

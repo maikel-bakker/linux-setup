@@ -55,3 +55,10 @@ Apply the login-shell choice after installing the shell manifest:
 ```sh
 sudo ./scripts/configure-shell mb
 ```
+
+Configure the standard DNS resolver before installing tools that make network
+requests:
+
+```sh
+sudo ./scripts/configure-systemd-resolved
+```

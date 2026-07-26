@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if (( EUID != 0 )); then
+  printf 'Run with sudo: sudo %s\n' "$0" >&2
+  exit 1
+fi
+
+# systemd-resolved provides a local DNS stub at 127.0.0.53.  Programs which
+# use the libc resolver (including Codex) need /etc/resolv.conf to point at
+# that stub; resolvectl alone does not configure those programs.
+systemctl enable --now systemd-resolved
+ln -sfn /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+
+printf 'Enabled systemd-resolved and linked /etc/resolv.conf to its DNS stub.\n'
