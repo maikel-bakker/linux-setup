@@ -15,4 +15,4 @@ sudo ./scripts/install-packages packages/20-shell.txt
 sudo ./scripts/configure-shell mb
 ```
 
-The apply script creates a symlink from `~/.zshrc` to the repository-managed file. It refuses to overwrite a regular existing file.
+The apply script creates a symlink from `~/.zshrc` to the repository-managed file. It safely replaces an identical regular copy; it refuses to overwrite a different existing file.
