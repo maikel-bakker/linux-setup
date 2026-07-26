@@ -1,0 +1,7 @@
+# Packages required for the encrypted, bootable base system.
+base
+linux
+linux-firmware
+amd-ucode
+btrfs-progs
+cryptsetup

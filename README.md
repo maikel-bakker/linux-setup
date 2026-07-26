@@ -39,3 +39,13 @@ Snapshots are still useful for rollback. They are not a substitute for a documen
 - `scripts/` will contain repeatable, idempotent steps wherever practical.
 
 Secrets, private keys, passwords, tokens, and machine-specific encryption material must never enter this repository.
+
+## Package manifests
+
+Install one or more package manifests with:
+
+```sh
+sudo ./scripts/install-packages packages/00-bootstrap.txt packages/10-core-services.txt
+```
+
+The script ignores empty lines and comments, and passes the remaining package names to `pacman -S --needed`. Add a package to the appropriate manifest before installing it on the system.

@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if (( EUID != 0 )); then
+  printf 'Run with sudo: sudo %s <manifest> [<manifest> ...]\n' "$0" >&2
+  exit 1
+fi
+
+if (( $# == 0 )); then
+  printf 'Usage: sudo %s <manifest> [<manifest> ...]\n' "$0" >&2
+  exit 1
+fi
+
+packages=()
+for manifest in "$@"; do
+  while IFS= read -r package; do
+    [[ -z "$package" || "$package" == \#* ]] && continue
+    packages+=("$package")
+  done < "$manifest"
+done
+
+pacman -S --needed "${packages[@]}"

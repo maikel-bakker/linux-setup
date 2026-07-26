@@ -1,0 +1,5 @@
+# Persistent network, administration, and compressed swap.
+networkmanager
+openssh
+sudo
+zram-generator
