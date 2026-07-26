@@ -1,0 +1,2 @@
+# User-local global npm tools. Keep credentials out of this repository.
+@openai/codex

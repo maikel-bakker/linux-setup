@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if (( $# == 0 )); then
+  printf 'Usage: %s <manifest> [<manifest> ...]\n' "$0" >&2
+  exit 1
+fi
+
+if ! command -v npm > /dev/null 2>&1; then
+  printf 'npm is required. Install packages/30-web-development.txt first.\n' >&2
+  exit 1
+fi
+
+# Keep npm-installed CLIs out of directories owned by pacman.
+npm config set prefix "$HOME/.local"
+
+packages=()
+for manifest in "$@"; do
+  while IFS= read -r package; do
+    [[ -z "$package" || "$package" == \#* ]] && continue
+    packages+=("$package")
+  done < "$manifest"
+done
+
+npm install --global "${packages[@]}"

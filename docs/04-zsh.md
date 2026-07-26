@@ -4,7 +4,7 @@ The Zsh configuration is derived from the physical host and managed at `dotfiles
 
 - Oh My Zsh with the `robbyrussell` theme;
 - the `git` and `zsh-autosuggestions` plugins;
-- an optional `codex` alias backed by `npx`.
+- `~/.local/bin` on `PATH` for user-local npm-installed command-line tools.
 
 Third-party framework repositories are pinned by commit in `scripts/install-zsh-framework`, matching the revisions previously used on the physical host. Install the Zsh package manifest first, then run the framework and apply scripts as the target user:
 
