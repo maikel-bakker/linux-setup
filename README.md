@@ -49,3 +49,9 @@ sudo ./scripts/install-packages packages/00-bootstrap.txt packages/10-core-servi
 ```
 
 The script ignores empty lines and comments, and passes the remaining package names to `pacman -S --needed`. Add a package to the appropriate manifest before installing it on the system.
+
+Apply the login-shell choice after installing the shell manifest:
+
+```sh
+sudo ./scripts/configure-shell mb
+```
