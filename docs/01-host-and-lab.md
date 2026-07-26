@@ -29,6 +29,21 @@ AMD SVM virtualization is enabled in firmware and `/dev/kvm` is present. The use
 
 The persistent libvirt network named `default` is active and marked to autostart. It is the lab's NAT network.
 
+## Host firewall integration
+
+UFW has a default-deny input and forwarding policy on this host. Libvirt's `dnsmasq` process was correctly bound to `virbr0`, but UFW silently dropped guest DNS and DHCP requests; it also blocked guest TCP traffic forwarded to the internet. The following UFW rules are required for this lab while the physical host uses Wi-Fi interface `wlan0`:
+
+```sh
+sudo ufw allow in on virbr0 from 192.168.122.0/24 to 192.168.122.1 port 53 proto udp
+sudo ufw allow in on virbr0 from 192.168.122.0/24 to 192.168.122.1 port 53 proto tcp
+sudo ufw allow in on virbr0 from 192.168.122.0/24 to 192.168.122.1 port 67 proto udp
+sudo ufw route allow in on virbr0 out on wlan0 from 192.168.122.0/24
+```
+
+The first three permit only DNS and DHCP from the private VM subnet to the host bridge. The last permits VM-originated internet traffic through the active uplink; connection tracking permits the corresponding replies. If the physical uplink changes, replace `wlan0` with the interface reported by `ip route get 1.1.1.1`.
+
+NordVPN's firewall allowlist also includes `192.168.122.0/24`. It was not the root cause in this instance, but retaining the scoped allowlist avoids a separate VPN firewall conflict.
+
 ## First lab VM: intended hardware
 
 | Virtual component | Choice | Why |
