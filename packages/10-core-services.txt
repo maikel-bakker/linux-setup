@@ -1,4 +1,5 @@
 # Persistent network, administration, and compressed swap.
+git
 networkmanager
 openssh
 sudo
