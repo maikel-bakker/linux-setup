@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+repository_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+source_file="$repository_root/dotfiles/zsh/.zshrc"
+target_file="$HOME/.zshrc"
+
+if [[ -e "$target_file" && ! -L "$target_file" ]]; then
+  printf 'Refusing to overwrite existing file: %s\n' "$target_file" >&2
+  printf 'Review or back it up first, then run this script again.\n' >&2
+  exit 1
+fi
+
+ln -sfn "$source_file" "$target_file"
+printf 'Linked %s to the repository-managed Zsh configuration.\n' "$target_file"

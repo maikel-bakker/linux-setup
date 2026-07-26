@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if ! command -v git > /dev/null 2>&1; then
+  printf 'Git is required. Install packages/10-core-services.txt first.\n' >&2
+  exit 1
+fi
+
+install_pinned_repo() {
+  local repository="$1"
+  local revision="$2"
+  local target="$3"
+
+  if [[ -e "$target" && ! -d "$target/.git" ]]; then
+    printf 'Refusing to replace non-Git path: %s\n' "$target" >&2
+    exit 1
+  fi
+
+  if [[ ! -d "$target/.git" ]]; then
+    git clone "$repository" "$target"
+  fi
+
+  git -C "$target" fetch --quiet origin "$revision"
+  git -C "$target" checkout --quiet --detach "$revision"
+}
+
+install_pinned_repo \
+  https://github.com/ohmyzsh/ohmyzsh.git \
+  677a4592b18c08ddea737f8aca70bac0e9fc9313 \
+  "$HOME/.oh-my-zsh"
+
+install_pinned_repo \
+  https://github.com/zsh-users/zsh-autosuggestions.git \
+  85919cd1ffa7d2d5412f6d3fe437ebdbeeec4fc5 \
+  "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+
+printf 'Installed pinned Oh My Zsh and zsh-autosuggestions revisions.\n'
