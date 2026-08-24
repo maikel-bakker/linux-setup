@@ -1,0 +1,83 @@
+configuration {
+    modi: "drun,run,window";
+    show-icons: true;
+    display-drun: "Applications";
+    display-run: "Run";
+    display-window: "Windows";
+    drun-display-format: "{name}";
+    terminal: "kitty";
+    font: "Noto Sans 12";
+}
+
+* {
+    mocha-base: #1e1e2e;
+    mocha-surface0: #313244;
+    mocha-surface1: #45475a;
+    mocha-text: #cdd6f4;
+    mocha-subtext0: #a6adc8;
+    mocha-sky: #89dceb;
+    mocha-mauve: #cba6f7;
+
+    background-color: transparent;
+    text-color: @mocha-text;
+}
+
+window {
+    width: 42em;
+    padding: 10px;
+    border: 2px;
+    border-radius: 10px;
+    border-color: @mocha-mauve;
+    background-color: @mocha-base;
+}
+
+mainbox {
+    spacing: 10px;
+}
+
+inputbar {
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-color: @mocha-surface0;
+    children: [ prompt, entry ];
+}
+
+prompt {
+    padding: 0 10px 0 0;
+    text-color: @mocha-mauve;
+}
+
+entry {
+    placeholder: "Search applications";
+    placeholder-color: @mocha-subtext0;
+}
+
+listview {
+    lines: 8;
+    columns: 1;
+    spacing: 4px;
+    scrollbar: false;
+    fixed-height: false;
+}
+
+element {
+    padding: 9px 12px;
+    spacing: 10px;
+    border-radius: 8px;
+}
+
+element selected {
+    background-color: @mocha-surface1;
+}
+
+element-icon {
+    size: 1.4em;
+}
+
+element-text {
+    vertical-align: 0.5;
+}
+
+element-text selected {
+    text-color: @mocha-sky;
+}

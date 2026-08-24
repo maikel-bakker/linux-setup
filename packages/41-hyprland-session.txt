@@ -3,7 +3,7 @@ hyprland
 kitty
 ttf-jetbrains-mono-nerd
 waybar
-fuzzel
+rofi
 mako
 hyprpaper
 hyprlock

@@ -10,7 +10,7 @@ basic session is proven.
 The initial supporting components are:
 
 - Waybar for workspace and system status;
-- Fuzzel for application launching;
+- Rofi for application launching and window switching;
 - Mako for notifications;
 - Hyprpolkitagent for graphical privilege prompts;
 - the Hyprland and GTK portal backends for screen sharing and file dialogs;
@@ -52,7 +52,7 @@ Useful initial bindings:
 | Binding | Action |
 | --- | --- |
 | `Super+Enter` | Open Kitty |
-| `Super+Space` | Open Fuzzel |
+| `Super+Space` | Open Rofi |
 | `Super+F` | Open Nautilus |
 | `Super+W` | Close the focused window |
 | `Super+M` | Exit Hyprland |
@@ -61,7 +61,7 @@ Useful initial bindings:
 | `Super` + arrow | Change focus |
 | `Super` + left/right mouse drag | Move/resize a window |
 
-Validate Kitty, Fuzzel, Waybar, notifications, window tiling, keyboard/mouse
+Validate Kitty, Rofi, Waybar, notifications, window tiling, keyboard/mouse
 input, SPICE display resizing, and `wpctl status` from inside the session. Exit
 with `Super+M` and inspect the journal if the session fails:
 

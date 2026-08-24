@@ -40,6 +40,8 @@ Implemented inside the VM:
   is configured: see `docs/09-session-locking.md`.
 - Nautilus replaces Thunar as the selected graphical file manager and is bound
   to `Super+F`: see decision record 0011.
+- Rofi 2.0 replaces Fuzzel as the native Wayland application launcher on
+  `Super+Space`, with a managed Catppuccin Mocha theme: see decision record 0012.
 
 ## Host networking prerequisite
 

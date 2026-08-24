@@ -3,7 +3,7 @@
 ## Scope
 
 Use Catppuccin Mocha as the first coherent desktop palette. The repository
-applies the palette directly to Hyprland, Waybar, Kitty, Fuzzel, and Mako so the
+applies the palette directly to Hyprland, Waybar, Kitty, Rofi, and Mako so the
 configuration remains readable without a theme-manager dependency.
 
 The first themed Waybar was a deliberately small diagnostic configuration. It
@@ -25,7 +25,7 @@ systemctl --user restart waybar.service
 makoctl reload
 ```
 
-Open a new Kitty window and invoke Fuzzel to see their updated configuration.
+Open a new Kitty window and invoke Rofi to see their updated configuration.
 Hyprland reloads its linked configuration when the file changes.
 
 The Athena adaptation also requires the packages recorded in the Hyprland
@@ -51,10 +51,16 @@ license, and never store credentials for image services in the repository.
 Applied in `arch-lab` on 2026-07-29. Waybar loaded the managed JSON and CSS,
 connected to Hyprland IPC, and configured a 32-pixel bar for `Virtual-1`. The
 old directly launched Waybar process was stopped, leaving only the active
-systemd-managed instance. Fuzzel accepted its configuration, Hyprland accepted
+systemd-managed instance. The original Fuzzel configuration was later replaced
+by a managed Rofi configuration. Hyprland accepted
 the updated Lua theme, and the Waybar unit passed systemd verification.
 
 The Athena adaptation was loaded successfully on 2026-08-24 with its group
 drawers, persistent workspaces, audio slider, and Catppuccin CSS. The requested
 height was adjusted from Athena's 42 pixels to 43 because the current Waybar/GTK
 stack reported 43 as the minimum for these modules.
+
+Rofi 2.0 replaced Fuzzel on 2026-08-24. `Super+Space` opens the native Wayland
+launcher with the managed Catppuccin Mocha Rasi theme, the theme passes Rofi's
+validator, and the superseded Fuzzel package and managed configuration were
+removed.

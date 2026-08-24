@@ -2,7 +2,7 @@
 -- policy only after the basic VM session has been validated.
 
 local terminal = "kitty"
-local launcher = "fuzzel"
+local launcher = "rofi -show drun"
 local file_manager = "nautilus"
 local main_mod = "SUPER"
 
