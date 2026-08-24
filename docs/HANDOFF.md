@@ -23,7 +23,8 @@ Implemented inside the VM:
 - NetworkManager, systemd-resolved, SSH, `sudo`, user `mb`, and root SSH login disabled.
 - zram swap and systemd-timesyncd: see `docs/03-core-services.md`.
 - Zsh, pinned Oh My Zsh, and pinned zsh-autosuggestions: see `docs/04-zsh.md`.
-- Node.js/npm manifest and user-local global npm tooling: see `docs/05-web-development.md`.
+- Node.js/npm and the npm-installed Codex CLI are validated with a user-local
+  `~/.local` prefix: see `docs/05-web-development.md` and decision record 0014.
 - The compositor-independent Mesa, PipeWire/WirePlumber, RealtimeKit, and font
   foundation is installed and its SSH-visible service graph is validated: see
   `docs/06-graphical-foundation.md`.
