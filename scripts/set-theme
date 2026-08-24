@@ -24,6 +24,7 @@ theme_directory="$repository_root/themes/$theme_name"
 config_directory="$HOME/.config/linux-setup"
 state_directory="${XDG_STATE_HOME:-$HOME/.local/state}/linux-setup"
 active_theme="$config_directory/theme"
+active_wallpaper="$config_directory/wallpaper"
 
 required_files=(mode hyprland.lua waybar.css kitty.conf rofi.rasi mako.conf hyprlock.conf)
 if [[ ! -d "$theme_directory" ]]; then
@@ -41,6 +42,17 @@ theme_mode="$(<"$theme_directory/mode")"
 if [[ "$theme_mode" != "dark" && "$theme_mode" != "light" ]]; then
   printf 'Theme mode must be dark or light: %s\n' "$theme_directory/mode" >&2
   exit 1
+fi
+
+if [[ -z "${HYPRLAND_INSTANCE_SIGNATURE:-}" ]]; then
+  hypr_runtime="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/hypr"
+  shopt -s nullglob
+  hypr_sockets=("$hypr_runtime"/*/.socket.sock)
+  shopt -u nullglob
+  if (( ${#hypr_sockets[@]} == 1 )); then
+    export HYPRLAND_INSTANCE_SIGNATURE
+    HYPRLAND_INSTANCE_SIGNATURE="$(basename -- "$(dirname -- "${hypr_sockets[0]}")")"
+  fi
 fi
 
 mkdir -p "$config_directory" "$state_directory"
@@ -62,6 +74,39 @@ fi
 if [[ "$reload_components" == true ]]; then
   if [[ -n "${HYPRLAND_INSTANCE_SIGNATURE:-}" ]] && command -v hyprctl > /dev/null; then
     hyprctl reload > /dev/null
+
+    wallpaper_file="$theme_directory/wallpaper"
+    if [[ -f "$wallpaper_file" ]]; then
+      wallpaper_relative="$(<"$wallpaper_file")"
+      wallpaper_path="$(readlink -f -- "$repository_root/$wallpaper_relative")"
+      if [[ "$wallpaper_path" != "$repository_root/"* || ! -f "$wallpaper_path" ]]; then
+        printf 'Invalid wallpaper for theme %s: %s\n' "$theme_name" "$wallpaper_relative" >&2
+        exit 1
+      fi
+
+      if [[ -e "$active_wallpaper" && ! -L "$active_wallpaper" ]]; then
+        printf 'Refusing to replace non-symlink wallpaper path: %s\n' "$active_wallpaper" >&2
+        exit 1
+      fi
+      ln -sfn -- "$wallpaper_path" "$active_wallpaper"
+      if systemd-detect-virt --vm --quiet && [[ "${LINUX_SETUP_ALLOW_VM_WALLPAPER:-}" != "1" ]]; then
+        systemctl --user stop hyprpaper.service
+        if systemctl --user is-failed --quiet hyprpaper.service; then
+          systemctl --user reset-failed hyprpaper.service
+        fi
+        printf 'Wallpaper assigned but Hyprpaper skipped in VM; set LINUX_SETUP_ALLOW_VM_WALLPAPER=1 to test it.\n'
+      else
+        systemctl --user restart hyprpaper.service
+      fi
+    else
+      systemctl --user stop hyprpaper.service
+      if systemctl --user is-failed --quiet hyprpaper.service; then
+        systemctl --user reset-failed hyprpaper.service
+      fi
+      if [[ -L "$active_wallpaper" ]]; then
+        rm "$active_wallpaper"
+      fi
+    fi
   fi
   if systemctl --user is-active --quiet waybar.service 2> /dev/null; then
     systemctl --user restart waybar.service

@@ -42,12 +42,16 @@ be added only with an explicit confirmation menu.
 
 ## Wallpaper
 
-The initial palette uses Hyprland's plain background. The first repository-owned
-wallpaper candidate is `assets/wallpapers/desert-catppuccin.png`, photographed
-and created by Maikel Bakker; its copyright notice is recorded beside the
-asset. It is deliberately not wired into Hyprland yet. Do not add downloaded
+The Mocha theme uses `assets/wallpapers/desert-catppuccin.png`, photographed and
+created by Maikel Bakker; its copyright notice is recorded beside the asset.
+The theme switcher starts Hyprpaper and displays it in `cover` mode. Latte has
+no wallpaper assignment and stops Hyprpaper when selected. Do not add downloaded
 artwork without recording its source and license, and never store credentials
 for image services in the repository.
+
+Hyprpaper is not launched automatically inside virtual machines. The lab's QEMU
+graphics path fails GBM buffer allocation and causes Hyprpaper 0.8.4 to
+segfault; the assignment is retained for validation on the native host.
 
 ## Lab validation
 

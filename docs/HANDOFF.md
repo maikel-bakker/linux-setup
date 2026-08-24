@@ -55,6 +55,10 @@ Implemented inside the VM:
 - A repository-native, Rofi-fronted theme switcher applies Catppuccin Mocha and
   Latte across the selected desktop components and is live-validated: see
   `docs/12-theme-switching.md` and decision record 0017.
+- The repository-owned Desert Catppuccin wallpaper is assigned to Mocha through
+  Hyprpaper and the active theme is restored when Hyprland starts. Hyprpaper is
+  skipped in VMs after its QEMU GBM allocation failure; native rendering remains
+  a physical-host validation item.
 
 ## Host networking prerequisite
 
@@ -62,12 +66,9 @@ The physical host runs UFW with default-deny input/forward policy. The VM networ
 
 ## Current next action
 
-Configure the portable Zed settings after reviewing the existing configuration
-from the other desktop, then build the first development workspace workflow.
-Automatic session startup remains a later graphical sublayer. Wallpaper
-generation was unavailable and is deferred. Theme switching and safe power
-controls remain later sublayers. Authentication remains interactive, and API
-keys must never be committed.
+Build the first development workspace workflow. Automatic session startup and
+safe power controls remain later graphical sublayers. Authentication remains
+interactive, and API keys must never be committed.
 
 ## How to continue
 
@@ -78,6 +79,6 @@ Start Codex from the VM repository and say:
 ## Deferred decisions
 
 - Display manager versus TTY session startup.
-- Hyprland wallpaper, theme switching, and persisted workspace/layout workflow.
+- Persisted workspace/layout workflow.
 - Secure Boot, TPM unlocking, snapshots/backup tooling, and GPU passthrough.
 - Additional development tooling and Zed configuration.

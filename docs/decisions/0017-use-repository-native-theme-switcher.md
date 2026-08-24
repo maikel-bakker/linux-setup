@@ -22,7 +22,8 @@ fragments under `themes/<name>/`, expose the active directory through one user
 configuration symlink, and make stable application configs import those
 fragments. Use Rofi as the graphical chooser. Begin with Catppuccin Mocha and
 Catppuccin Latte, and synchronize Zed and GTK through the system dark/light
-preference.
+preference. Allow a theme to assign one repository-owned wallpaper by relative
+path; themes without one retain the compositor's plain background.
 
 ## Consequences
 
@@ -30,5 +31,6 @@ preference.
 - New themes must provide every required color fragment.
 - Rofi remains replaceable because it is only a front end to the switcher.
 - Application-specific reload limitations remain explicit.
-- Browser content, remote web applications, and wallpapers are not automatically
-  themed.
+- Browser content and remote web applications are not automatically themed.
+- Wallpaper assets require recorded provenance and explicit per-theme
+  assignment.

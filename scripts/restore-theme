@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+script_path="$(readlink -f -- "${BASH_SOURCE[0]}")"
+repository_root="$(cd -- "$(dirname -- "$script_path")/.." && pwd)"
+state_file="${XDG_STATE_HOME:-$HOME/.local/state}/linux-setup/theme.name"
+
+theme_name="catppuccin-mocha"
+if [[ -f "$state_file" ]]; then
+  theme_name="$(<"$state_file")"
+fi
+
+exec "$repository_root/scripts/set-theme" "$theme_name"

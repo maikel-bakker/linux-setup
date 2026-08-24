@@ -48,6 +48,7 @@ hl.config({
 })
 
 hl.on("hyprland.start", function()
+    hl.exec_cmd("linux-setup-theme-restore")
     hl.exec_cmd("systemctl --user start waybar.service")
     hl.exec_cmd("mako")
     hl.exec_cmd("systemctl --user start hyprpolkitagent.service")
