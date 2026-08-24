@@ -2,9 +2,9 @@
 
 ## Scope
 
-Use Catppuccin Mocha as the first coherent desktop palette. The repository
-applies the palette directly to Hyprland, Waybar, Kitty, Rofi, and Mako so the
-configuration remains readable without a theme-manager dependency.
+Catppuccin Mocha established the first coherent desktop palette. The later
+repository-native switcher adds Catppuccin Latte and moves application colors
+into active native fragments; see `docs/12-theme-switching.md`.
 
 The first themed Waybar was a deliberately small diagnostic configuration. It
 was later replaced by an adaptation of Muhammad Haikal Hakim's MIT-licensed
@@ -26,7 +26,8 @@ makoctl reload
 ```
 
 Open a new Kitty window and invoke Rofi to see their updated configuration.
-Hyprland reloads its linked configuration when the file changes.
+Hyprland reloads its linked configuration when the file changes. Use
+`Super+Ctrl+Space` to select between the managed desktop themes.
 
 The Athena adaptation also requires the packages recorded in the Hyprland
 session manifest:

@@ -3,6 +3,10 @@ set -euo pipefail
 
 repository_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 
+if [[ ! -L "$HOME/.config/linux-setup/theme" ]]; then
+  "$repository_root/scripts/set-theme" --no-reload catppuccin-mocha
+fi
+
 link_managed_file() {
   local source_file="$1"
   local target_file="$2"
@@ -27,17 +31,39 @@ link_managed_file "$repository_root/dotfiles/waybar/config.jsonc" \
   "$HOME/.config/waybar/config.jsonc"
 link_managed_file "$repository_root/dotfiles/waybar/style.css" \
   "$HOME/.config/waybar/style.css"
+link_managed_file "$HOME/.config/linux-setup/theme/waybar.css" \
+  "$HOME/.config/waybar/theme.css"
 link_managed_file "$repository_root/dotfiles/kitty/kitty.conf" \
   "$HOME/.config/kitty/kitty.conf"
+link_managed_file "$HOME/.config/linux-setup/theme/kitty.conf" \
+  "$HOME/.config/kitty/theme.conf"
 link_managed_file "$repository_root/dotfiles/rofi/config.rasi" \
   "$HOME/.config/rofi/config.rasi"
+link_managed_file "$HOME/.config/linux-setup/theme/rofi.rasi" \
+  "$HOME/.config/rofi/theme.rasi"
 link_managed_file "$repository_root/dotfiles/mako/config" \
   "$HOME/.config/mako/config"
+link_managed_file "$HOME/.config/linux-setup/theme/mako.conf" \
+  "$HOME/.config/mako/theme.conf"
+link_managed_file "$HOME/.config/linux-setup/theme/hyprland.lua" \
+  "$HOME/.config/hypr/theme.lua"
+link_managed_file "$HOME/.config/linux-setup/theme/hyprlock.conf" \
+  "$HOME/.config/hypr/hyprlock-theme.conf"
 link_managed_file "$repository_root/dotfiles/systemd/user/waybar.service" \
   "$HOME/.config/systemd/user/waybar.service"
+link_managed_file "$repository_root/scripts/set-theme" \
+  "$HOME/.local/bin/linux-setup-theme"
+link_managed_file "$repository_root/scripts/choose-theme" \
+  "$HOME/.local/bin/linux-setup-theme-menu"
 
 systemctl --user daemon-reload
 systemctl --user enable waybar.service
+if systemctl --user is-failed --quiet waybar.service; then
+  systemctl --user reset-failed waybar.service
+  if pgrep -x Hyprland > /dev/null; then
+    systemctl --user start waybar.service
+  fi
+fi
 
 old_fuzzel_config="$HOME/.config/fuzzel/fuzzel.ini"
 if [[ -L "$old_fuzzel_config" ]] && \
@@ -46,4 +72,6 @@ if [[ -L "$old_fuzzel_config" ]] && \
   printf 'Removed obsolete managed Fuzzel configuration.\n'
 fi
 
-printf 'Applied the Catppuccin Mocha desktop theme. Restart themed applications to reload it.\n'
+active_theme="$(basename -- "$(readlink -f -- "$HOME/.config/linux-setup/theme")")"
+"$repository_root/scripts/set-theme" "$active_theme"
+printf 'Applied desktop theme integration.\n'

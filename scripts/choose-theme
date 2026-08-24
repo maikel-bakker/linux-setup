@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+script_path="$(readlink -f -- "${BASH_SOURCE[0]}")"
+repository_root="$(cd -- "$(dirname -- "$script_path")/.." && pwd)"
+
+if ! command -v rofi > /dev/null; then
+  printf 'Rofi is required for the graphical theme chooser.\n' >&2
+  exit 1
+fi
+
+themes=()
+for theme_directory in "$repository_root"/themes/*; do
+  [[ -d "$theme_directory" ]] || continue
+  themes+=("$(basename -- "$theme_directory")")
+done
+
+if (( ${#themes[@]} == 0 )); then
+  printf 'No themes found in %s/themes\n' "$repository_root" >&2
+  exit 1
+fi
+
+selection="$(printf '%s\n' "${themes[@]}" | sort | rofi -dmenu -i -p Theme)" || exit 0
+[[ -n "$selection" ]] || exit 0
+
+exec "$repository_root/scripts/set-theme" "$selection"

@@ -5,6 +5,8 @@ local terminal = "kitty"
 local launcher = "rofi -show drun"
 local file_manager = "nautilus"
 local main_mod = "SUPER"
+local theme = dofile(os.getenv("HOME") .. "/.config/hypr/theme.lua")
+local theme_chooser = "linux-setup-theme-menu"
 
 hl.monitor({
     output = "",
@@ -22,8 +24,8 @@ hl.config({
         gaps_out = 10,
         border_size = 2,
         col = {
-            active_border = "rgba(cba6f7ff)",
-            inactive_border = "rgba(45475acc)",
+            active_border = theme.active_border,
+            inactive_border = theme.inactive_border,
         },
         layout = "dwindle",
     },
@@ -53,6 +55,7 @@ end)
 
 hl.bind(main_mod .. " + RETURN", hl.dsp.exec_cmd(terminal))
 hl.bind(main_mod .. " + SPACE", hl.dsp.exec_cmd(launcher))
+hl.bind(main_mod .. " + CTRL + SPACE", hl.dsp.exec_cmd(theme_chooser))
 hl.bind(main_mod .. " + F", hl.dsp.exec_cmd(file_manager))
 hl.bind(main_mod .. " + W", hl.dsp.window.close())
 hl.bind(main_mod .. " + V", hl.dsp.window.float({ action = "toggle" }))

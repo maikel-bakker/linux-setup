@@ -9,17 +9,11 @@ configuration {
     font: "Noto Sans 12";
 }
 
-* {
-    mocha-base: #1e1e2e;
-    mocha-surface0: #313244;
-    mocha-surface1: #45475a;
-    mocha-text: #cdd6f4;
-    mocha-subtext0: #a6adc8;
-    mocha-sky: #89dceb;
-    mocha-mauve: #cba6f7;
+@import "theme.rasi"
 
+* {
     background-color: transparent;
-    text-color: @mocha-text;
+    text-color: @theme-text;
 }
 
 window {
@@ -27,8 +21,8 @@ window {
     padding: 10px;
     border: 2px;
     border-radius: 10px;
-    border-color: @mocha-mauve;
-    background-color: @mocha-base;
+    border-color: @theme-accent;
+    background-color: @theme-base;
 }
 
 mainbox {
@@ -38,18 +32,18 @@ mainbox {
 inputbar {
     padding: 10px 12px;
     border-radius: 8px;
-    background-color: @mocha-surface0;
+    background-color: @theme-surface0;
     children: [ prompt, entry ];
 }
 
 prompt {
     padding: 0 10px 0 0;
-    text-color: @mocha-mauve;
+    text-color: @theme-accent;
 }
 
 entry {
     placeholder: "Search applications";
-    placeholder-color: @mocha-subtext0;
+    placeholder-color: @theme-subtext0;
 }
 
 listview {
@@ -67,7 +61,7 @@ element {
 }
 
 element selected {
-    background-color: @mocha-surface1;
+    background-color: @theme-surface1;
 }
 
 element-icon {
@@ -79,5 +73,5 @@ element-text {
 }
 
 element-text selected {
-    text-color: @mocha-sky;
+    text-color: @theme-sky;
 }

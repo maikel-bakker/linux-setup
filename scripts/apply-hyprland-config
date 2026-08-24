@@ -8,6 +8,10 @@ target_file="$target_directory/hyprland.lua"
 
 mkdir -p "$target_directory"
 
+if [[ ! -L "$HOME/.config/linux-setup/theme" ]]; then
+  "$repository_root/scripts/set-theme" --no-reload catppuccin-mocha
+fi
+
 if [[ -e "$target_file" && ! -L "$target_file" ]]; then
   if cmp --silent "$source_file" "$target_file"; then
     rm "$target_file"
@@ -19,4 +23,5 @@ if [[ -e "$target_file" && ! -L "$target_file" ]]; then
 fi
 
 ln -sfn "$source_file" "$target_file"
+ln -sfn "$HOME/.config/linux-setup/theme/hyprland.lua" "$target_directory/theme.lua"
 printf 'Linked %s to the repository-managed Hyprland configuration.\n' "$target_file"

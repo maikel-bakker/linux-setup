@@ -52,6 +52,9 @@ Implemented inside the VM:
 - Zed package installation and Rofi discovery are validated. Its renderer falls
   back to llvmpipe because the VM does not expose accelerated Vulkan; native Zed
   rendering remains a required physical-host test with `vulkan-radeon`.
+- A repository-native, Rofi-fronted theme switcher applies Catppuccin Mocha and
+  Latte across the selected desktop components and is live-validated: see
+  `docs/12-theme-switching.md` and decision record 0017.
 
 ## Host networking prerequisite
 

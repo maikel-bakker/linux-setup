@@ -1,7 +1,5 @@
 font=Noto Sans 11
-background-color=#1e1e2ef2
-text-color=#cdd6f4ff
-border-color=#cba6f7ff
+include=~/.config/mako/theme.conf
 border-size=2
 border-radius=8
 width=360

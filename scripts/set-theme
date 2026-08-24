@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+reload_components=true
+if [[ "${1:-}" == "--no-reload" ]]; then
+  reload_components=false
+  shift
+fi
+
+if (( $# != 1 )); then
+  printf 'Usage: %s [--no-reload] <theme-name>\n' "$0" >&2
+  exit 1
+fi
+
+theme_name="$1"
+if [[ ! "$theme_name" =~ ^[a-z0-9][a-z0-9-]*$ ]]; then
+  printf 'Invalid theme name: %s\n' "$theme_name" >&2
+  exit 1
+fi
+
+script_path="$(readlink -f -- "${BASH_SOURCE[0]}")"
+repository_root="$(cd -- "$(dirname -- "$script_path")/.." && pwd)"
+theme_directory="$repository_root/themes/$theme_name"
+config_directory="$HOME/.config/linux-setup"
+state_directory="${XDG_STATE_HOME:-$HOME/.local/state}/linux-setup"
+active_theme="$config_directory/theme"
+
+required_files=(mode hyprland.lua waybar.css kitty.conf rofi.rasi mako.conf hyprlock.conf)
+if [[ ! -d "$theme_directory" ]]; then
+  printf 'Unknown theme: %s\n' "$theme_name" >&2
+  exit 1
+fi
+for required_file in "${required_files[@]}"; do
+  if [[ ! -f "$theme_directory/$required_file" ]]; then
+    printf 'Theme %s is missing %s\n' "$theme_name" "$required_file" >&2
+    exit 1
+  fi
+done
+
+theme_mode="$(<"$theme_directory/mode")"
+if [[ "$theme_mode" != "dark" && "$theme_mode" != "light" ]]; then
+  printf 'Theme mode must be dark or light: %s\n' "$theme_directory/mode" >&2
+  exit 1
+fi
+
+mkdir -p "$config_directory" "$state_directory"
+if [[ -e "$active_theme" && ! -L "$active_theme" ]]; then
+  printf 'Refusing to replace non-symlink theme path: %s\n' "$active_theme" >&2
+  exit 1
+fi
+ln -sfn -- "$theme_directory" "$active_theme"
+printf '%s\n' "$theme_name" > "$state_directory/theme.name"
+
+if command -v gsettings > /dev/null; then
+  if [[ "$theme_mode" == "dark" ]]; then
+    gsettings set org.gnome.desktop.interface color-scheme prefer-dark
+  else
+    gsettings set org.gnome.desktop.interface color-scheme default
+  fi
+fi
+
+if [[ "$reload_components" == true ]]; then
+  if [[ -n "${HYPRLAND_INSTANCE_SIGNATURE:-}" ]] && command -v hyprctl > /dev/null; then
+    hyprctl reload > /dev/null
+  fi
+  if systemctl --user is-active --quiet waybar.service 2> /dev/null; then
+    systemctl --user restart waybar.service
+  fi
+  if pgrep -x mako > /dev/null && command -v makoctl > /dev/null; then
+    makoctl reload
+  fi
+  if pgrep -x kitty > /dev/null; then
+    pkill -USR1 -x kitty
+  fi
+fi
+
+printf 'Applied theme: %s (%s)\n' "$theme_name" "$theme_mode"

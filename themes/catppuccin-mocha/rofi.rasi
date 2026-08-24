@@ -1,0 +1,9 @@
+* {
+    theme-base: #1e1e2e;
+    theme-surface0: #313244;
+    theme-surface1: #45475a;
+    theme-text: #cdd6f4;
+    theme-subtext0: #a6adc8;
+    theme-sky: #89dceb;
+    theme-accent: #cba6f7;
+}

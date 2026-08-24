@@ -4,6 +4,10 @@ set -euo pipefail
 repository_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 target_directory="$HOME/.config/hypr"
 
+if [[ ! -L "$HOME/.config/linux-setup/theme" ]]; then
+  "$repository_root/scripts/set-theme" --no-reload catppuccin-mocha
+fi
+
 link_managed_file() {
   local source_file="$1"
   local target_file="$2"
@@ -31,6 +35,8 @@ fi
 
 link_managed_file "$repository_root/dotfiles/hypr/hyprlock.conf" \
   "$target_directory/hyprlock.conf"
+link_managed_file "$HOME/.config/linux-setup/theme/hyprlock.conf" \
+  "$target_directory/hyprlock-theme.conf"
 link_managed_file "$repository_root/dotfiles/hypr/hypridle.conf" \
   "$target_directory/hypridle.conf"
 

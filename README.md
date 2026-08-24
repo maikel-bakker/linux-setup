@@ -83,6 +83,13 @@ Apply the managed Catppuccin Mocha theme after validating the first session:
 ./scripts/apply-desktop-theme
 ```
 
+Switch the integrated desktop palette directly or through Rofi:
+
+```sh
+linux-setup-theme catppuccin-mocha
+linux-setup-theme-menu
+```
+
 Apply and manually test the session lock before enabling idle timers:
 
 ```sh
