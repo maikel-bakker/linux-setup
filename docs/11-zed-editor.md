@@ -53,9 +53,43 @@ Before adopting Zed on the physical AMD host, install `vulkan-radeon` and requir
 `vulkaninfo --summary`, `vkcube-wayland`, and Zed itself to render without a
 software-emulation warning.
 
+## Managed configuration
+
+Zed's user-editable configuration is managed as one directory:
+
+```text
+dotfiles/zed/
+├── AGENTS.md
+└── settings.json
+```
+
+Link the local configuration directory to the repository after closing Zed:
+
+```sh
+./scripts/apply-zed-config
+```
+
+If `~/.config/zed` already exists, the script moves it to a dated sibling
+backup (for example, `zed.pre-linux-setup-20260824T120000`) before making the
+symlink. It refuses to replace a symlink that points somewhere else.
+
+The managed configuration intentionally includes editor preferences and Zed
+agent preferences. The agent permissions include narrow, project-specific
+allow rules for the existing `mb-apps` test paths and ordinary `npm run`,
+`node`, and `git` commands. Review these rules before adding new always-allow
+patterns: they are authorization, not merely appearance settings.
+
+Zed account credentials, extension data, databases, logs, project history, and
+other machine-local state remain outside this configuration directory and must
+not be added to Git. `settings_backup.json` from the original local directory
+is deliberately not imported; Git history is the managed-settings backup.
+
+To change settings, edit the linked file through Zed or directly in the
+repository, inspect `git diff`, and commit the result. Pull and run the script
+on another machine to adopt the same configuration.
+
 ## Deferred configuration
 
-- Catppuccin theme and editor preferences.
 - Language servers, formatters, and project-specific tooling.
 - Zed account login and a Secret Service provider.
 - Hyprland development workspace rules and launch scripts.

@@ -1,0 +1,83 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "project_panel": {
+    "dock": "left"
+  },
+  "outline_panel": {
+    "dock": "left"
+  },
+  "collaboration_panel": {
+    "dock": "left"
+  },
+  "git_panel": {
+    "dock": "left"
+  },
+  "edit_predictions": {
+    "provider": "copilot"
+  },
+  "format_on_save": "on",
+  "prettier": {
+    "allowed": true
+  },
+  "buffer_font_family": "JetBrainsMono Nerd Font",
+  "tab_size": 2,
+  "agent_ui_font_size": 17.0,
+  "agent": {
+    "dock": "right",
+    "tool_permissions": {
+      "tools": {
+        "delete_path": {
+          "always_allow": [
+            {
+              "pattern": "^mb\\-apps/apps/chat/e2e/tests/"
+            },
+            {
+              "pattern": "^mb\\-apps/apps/notes/e2e/tests/"
+            }
+          ]
+        },
+        "terminal": {
+          "always_allow": [
+            {
+              "pattern": "^npm\\s+run(\\s|$)"
+            },
+            {
+              "pattern": "^node\\b"
+            },
+            {
+              "pattern": "^git\\b"
+            }
+          ]
+        },
+        "create_directory": {
+          "default": "allow"
+        }
+      }
+    },
+    "default_profile": "write",
+    "inline_assistant_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-4o"
+    },
+    "default_model": {
+      "enable_thinking": true,
+      "provider": "openai",
+      "model": "gpt-5.3-codex"
+    },
+    "model_parameters": []
+  },
+  "ui_font_size": 17.0,
+  "buffer_font_size": 13.0,
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "Catppuccin Mocha"
+  }
+}

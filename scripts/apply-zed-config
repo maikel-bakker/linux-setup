@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+repository_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+source_directory="$repository_root/dotfiles/zed"
+target_directory="$HOME/.config/zed"
+
+if [[ ! -d "$source_directory" ]]; then
+  printf 'Managed Zed configuration is missing: %s\n' "$source_directory" >&2
+  exit 1
+fi
+
+if pgrep -x zed > /dev/null || pgrep -x zeditor > /dev/null; then
+  printf 'Close Zed before applying its configuration.\n' >&2
+  exit 1
+fi
+
+if [[ -L "$target_directory" ]]; then
+  if [[ "$(readlink -f -- "$target_directory")" == "$source_directory" ]]; then
+    printf 'Zed configuration already links to the repository-managed directory.\n'
+    exit 0
+  fi
+
+  printf 'Refusing to replace an unrelated symlink: %s\n' "$target_directory" >&2
+  exit 1
+fi
+
+if [[ -e "$target_directory" ]]; then
+  backup_directory="${target_directory}.pre-linux-setup-$(date +%Y%m%dT%H%M%S)"
+  mv -- "$target_directory" "$backup_directory"
+  printf 'Moved existing Zed configuration to %s\n' "$backup_directory"
+fi
+
+mkdir -p "$(dirname -- "$target_directory")"
+ln -s -- "$source_directory" "$target_directory"
+printf 'Linked %s to the repository-managed Zed configuration.\n' "$target_directory"
