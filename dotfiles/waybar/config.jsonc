@@ -18,7 +18,7 @@
   },
   "custom/distro": { "format": "", "tooltip": false },
   "custom/terminal": { "format": "󰆍", "on-click": "kitty", "tooltip": false },
-  "custom/files": { "format": "", "on-click": "thunar", "tooltip": false },
+  "custom/files": { "format": "", "on-click": "nautilus", "tooltip": false },
   "group/storage": { "orientation": "horizontal", "modules": ["disk", "memory"] },
   "disk": {
     "path": "/", "interval": 60, "format": "󱙋", "format-alt": "󱙋 {percentage_used}%",
@@ -41,7 +41,7 @@
   "hyprland/workspaces": {
     "format": "{icon} {windows}", "on-click": "activate",
     "persistent-workspaces": { "*": 5 }, "window-rewrite-default": "󰊠",
-    "window-rewrite": { "kitty": "󰆍", "thunar": "", "firefox": "󰈹", "zed": "󰨞" },
+    "window-rewrite": { "kitty": "󰆍", "org.gnome.Nautilus": "", "firefox": "󰈹", "zed": "󰨞" },
     "format-icons": {
       "active": "󰮯", "special": "󱁂", "default": "󰊠", "urgent": "󰧵", "empty": ""
     },

@@ -38,6 +38,8 @@ Implemented inside the VM:
 - Hyprlock authentication is validated, Hypridle is enabled and active with the
   managed five-minute lock and ten-minute display timeout rules, and `Super+L`
   is configured: see `docs/09-session-locking.md`.
+- Nautilus replaces Thunar as the selected graphical file manager and is bound
+  to `Super+F`: see decision record 0011.
 
 ## Host networking prerequisite
 

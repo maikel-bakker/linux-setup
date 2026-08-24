@@ -15,7 +15,7 @@ The initial supporting components are:
 - Hyprpolkitagent for graphical privilege prompts;
 - the Hyprland and GTK portal backends for screen sharing and file dialogs;
 - Xwayland for applications that do not support Wayland natively;
-- Thunar for graphical file management;
+- Nautilus (GNOME Files) for graphical file management;
 - `wl-clipboard`, Grim, and Slurp for clipboard and screenshot primitives;
 - Hyprpaper, Hyprlock, and Hypridle for later wallpaper, lock, and idle policy.
 
@@ -53,7 +53,7 @@ Useful initial bindings:
 | --- | --- |
 | `Super+Enter` | Open Kitty |
 | `Super+Space` | Open Fuzzel |
-| `Super+E` | Open Thunar |
+| `Super+F` | Open Nautilus |
 | `Super+W` | Close the focused window |
 | `Super+M` | Exit Hyprland |
 | `Super+1` … `Super+0` | Select workspace 1 … 10 |
@@ -86,6 +86,9 @@ The first graphical launch confirmed Hyprland, Waybar, Mako, both portal
 backends, portal screen-copy integration, and the Virtio audio devices. The
 polkit agent is supplied only as a systemd user service, so the managed config
 starts `hyprpolkitagent.service` rather than looking for a command on `PATH`.
+
+Nautilus replaced Thunar in the lab on 2026-08-24. `Super+F` and Waybar launch
+Nautilus successfully, and the superseded Thunar package was removed.
 
 ## Deferred until first-session validation
 

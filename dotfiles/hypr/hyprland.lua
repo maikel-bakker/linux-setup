@@ -3,7 +3,7 @@
 
 local terminal = "kitty"
 local launcher = "fuzzel"
-local file_manager = "thunar"
+local file_manager = "nautilus"
 local main_mod = "SUPER"
 
 hl.monitor({
@@ -53,7 +53,7 @@ end)
 
 hl.bind(main_mod .. " + RETURN", hl.dsp.exec_cmd(terminal))
 hl.bind(main_mod .. " + SPACE", hl.dsp.exec_cmd(launcher))
-hl.bind(main_mod .. " + E", hl.dsp.exec_cmd(file_manager))
+hl.bind(main_mod .. " + F", hl.dsp.exec_cmd(file_manager))
 hl.bind(main_mod .. " + W", hl.dsp.window.close())
 hl.bind(main_mod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(main_mod .. " + L", hl.dsp.exec_cmd("pidof hyprlock || hyprlock"))
