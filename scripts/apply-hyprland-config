@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+repository_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+source_file="$repository_root/dotfiles/hypr/hyprland.lua"
+target_directory="$HOME/.config/hypr"
+target_file="$target_directory/hyprland.lua"
+
+mkdir -p "$target_directory"
+
+if [[ -e "$target_file" && ! -L "$target_file" ]]; then
+  if cmp --silent "$source_file" "$target_file"; then
+    rm "$target_file"
+  else
+    printf 'Refusing to overwrite existing file: %s\n' "$target_file" >&2
+    printf 'Review or back it up first, then run this script again.\n' >&2
+    exit 1
+  fi
+fi
+
+ln -sfn "$source_file" "$target_file"
+printf 'Linked %s to the repository-managed Hyprland configuration.\n' "$target_file"

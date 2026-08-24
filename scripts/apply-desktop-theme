@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+repository_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+
+link_managed_file() {
+  local source_file="$1"
+  local target_file="$2"
+
+  mkdir -p "$(dirname -- "$target_file")"
+
+  if [[ -e "$target_file" && ! -L "$target_file" ]]; then
+    if cmp --silent "$source_file" "$target_file"; then
+      rm "$target_file"
+    else
+      printf 'Refusing to overwrite existing file: %s\n' "$target_file" >&2
+      printf 'Review or back it up first, then run this script again.\n' >&2
+      exit 1
+    fi
+  fi
+
+  ln -sfn "$source_file" "$target_file"
+  printf 'Linked %s\n' "$target_file"
+}
+
+link_managed_file "$repository_root/dotfiles/waybar/config.jsonc" \
+  "$HOME/.config/waybar/config.jsonc"
+link_managed_file "$repository_root/dotfiles/waybar/style.css" \
+  "$HOME/.config/waybar/style.css"
+link_managed_file "$repository_root/dotfiles/kitty/kitty.conf" \
+  "$HOME/.config/kitty/kitty.conf"
+link_managed_file "$repository_root/dotfiles/fuzzel/fuzzel.ini" \
+  "$HOME/.config/fuzzel/fuzzel.ini"
+link_managed_file "$repository_root/dotfiles/mako/config" \
+  "$HOME/.config/mako/config"
+link_managed_file "$repository_root/dotfiles/systemd/user/waybar.service" \
+  "$HOME/.config/systemd/user/waybar.service"
+
+systemctl --user daemon-reload
+systemctl --user enable waybar.service
+
+printf 'Applied the Catppuccin Mocha desktop theme. Restart themed applications to reload it.\n'

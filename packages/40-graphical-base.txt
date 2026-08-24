@@ -1,0 +1,10 @@
+# Compositor-independent graphics, desktop audio, and baseline fonts.
+mesa
+noto-fonts
+noto-fonts-emoji
+pipewire
+pipewire-alsa
+pipewire-jack
+pipewire-pulse
+rtkit
+wireplumber

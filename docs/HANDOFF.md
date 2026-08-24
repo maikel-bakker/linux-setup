@@ -24,6 +24,17 @@ Implemented inside the VM:
 - zram swap and systemd-timesyncd: see `docs/03-core-services.md`.
 - Zsh, pinned Oh My Zsh, and pinned zsh-autosuggestions: see `docs/04-zsh.md`.
 - Node.js/npm manifest and user-local global npm tooling: see `docs/05-web-development.md`.
+- The compositor-independent Mesa, PipeWire/WirePlumber, RealtimeKit, and font
+  foundation is installed and its SSH-visible service graph is validated: see
+  `docs/06-graphical-foundation.md`.
+- Hyprland with Kitty and its supporting session components are installed. The
+  managed minimal Lua configuration passes Hyprland's config parser, and the
+  first graphical launch is working with portals and Virtio audio: see
+  `docs/07-hyprland-session.md`.
+- The Catppuccin Mocha configurations are applied. The Hyprland-specific Waybar
+  is running as a crash-resistant user service: see `docs/08-desktop-theme.md`.
+- The managed Waybar configuration is now adapted from the MIT-licensed Athena
+  design. Its Nerd Font glyphs, drawers, and controls are working in the lab.
 
 ## Host networking prerequisite
 
@@ -31,24 +42,12 @@ The physical host runs UFW with default-deny input/forward policy. The VM networ
 
 ## Current next action
 
-Codex CLI is installed in the VM with API-key authentication. Its resolver
-requires the standard `/etc/resolv.conf` link; the working VM configuration is
-now represented by `scripts/configure-systemd-resolved` and documented in
-`docs/03-core-services.md`.
-
-On a rebuild, install the CLI and configure DNS before using Codex:
-
-```sh
-cd ~/Projects/linux-setup
-git pull
-./scripts/install-global-npm-packages npm/global-packages.txt
-sudo ./scripts/configure-systemd-resolved
-exec zsh -l
-codex --version
-codex doctor --summary
-```
-
-Authentication is interactive and API keys must never be committed. The npm script installs into `~/.local`; the managed Zsh config adds `~/.local/bin` to `PATH`.
+Configure and safely test Hyprlock/Hypridle. The Athena-inspired capsule layout,
+drawers, Nerd Font glyphs, and controls are installed and visually validated.
+Wallpaper generation was unavailable and is deferred. Automatic session
+startup, scripted development workspaces, theme switching, and safe power
+controls remain later sublayers. Authentication remains interactive, and API
+keys must never be committed.
 
 ## How to continue
 
@@ -58,7 +57,7 @@ Start Codex from the VM repository and say:
 
 ## Deferred decisions
 
-- Terminal emulator and graphical desktop/compositor/window-manager evaluation.
-- Persisted workspace/layout/session workflow for Hyprland alternatives.
+- Display manager versus TTY session startup.
+- Hyprland wallpaper, theme switching, and persisted workspace/layout workflow.
 - Secure Boot, TPM unlocking, snapshots/backup tooling, and GPU passthrough.
 - AUR workflow, Zed installation, and additional development tooling.

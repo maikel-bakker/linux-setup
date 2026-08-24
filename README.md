@@ -21,11 +21,11 @@ Snapshots are still useful for rollback. They are not a substitute for a documen
 | Layer | Scope | Status |
 | --- | --- | --- |
 | 0 | Principles, hardware inventory, VM lab | In progress |
-| 1 | Disk layout, encryption, filesystem, boot | Planned |
-| 2 | Base OS, kernel, drivers, network, audio | Planned |
-| 3 | Users, security, secrets, permissions | Planned |
-| 4 | Display, compositor/window manager, session | Planned |
-| 5 | Shell, terminal, editor, web development | Planned |
+| 1 | Disk layout, encryption, filesystem, boot | Implemented in lab |
+| 2 | Base OS, kernel, drivers, network, audio | In progress |
+| 3 | Users, security, secrets, permissions | In progress |
+| 4 | Display, compositor/window manager, session | In progress |
+| 5 | Shell, terminal, editor, web development | In progress |
 | 6 | Gaming, peripherals, media | Planned |
 | 7 | Backups, upgrades, monitoring, recovery | Planned |
 
@@ -61,4 +61,24 @@ requests:
 
 ```sh
 sudo ./scripts/configure-systemd-resolved
+```
+
+Install the compositor-independent graphics and audio foundation before testing
+a graphical session:
+
+```sh
+sudo ./scripts/install-packages packages/40-graphical-base.txt
+```
+
+Install the Hyprland session only after the graphical foundation:
+
+```sh
+sudo ./scripts/install-packages packages/41-hyprland-session.txt
+./scripts/apply-hyprland-config
+```
+
+Apply the managed Catppuccin Mocha theme after validating the first session:
+
+```sh
+./scripts/apply-desktop-theme
 ```

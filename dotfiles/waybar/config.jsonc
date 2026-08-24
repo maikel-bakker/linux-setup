@@ -1,0 +1,84 @@
+/*
+ * Adapted from Athena Waybar by Muhammad Haikal Hakim:
+ * https://github.com/haikal-hakim/athena
+ * MIT License; see LICENSE.athena.
+ */
+{
+  "layer": "top",
+  "position": "top",
+  "height": 43,
+  "spacing": 6,
+  "modules-left": ["group/distro-group", "group/storage", "group/system"],
+  "modules-center": ["idle_inhibitor", "hyprland/workspaces"],
+  "modules-right": ["group/audio", "network", "clock", "group/tray-group"],
+  "group/distro-group": {
+    "orientation": "horizontal",
+    "drawer": { "transition-duration": 650, "transition-left-to-right": true },
+    "modules": ["custom/distro", "custom/terminal", "custom/files"]
+  },
+  "custom/distro": { "format": "", "tooltip": false },
+  "custom/terminal": { "format": "󰆍", "on-click": "kitty", "tooltip": false },
+  "custom/files": { "format": "", "on-click": "thunar", "tooltip": false },
+  "group/storage": { "orientation": "horizontal", "modules": ["disk", "memory"] },
+  "disk": {
+    "path": "/", "interval": 60, "format": "󱙋", "format-alt": "󱙋 {percentage_used}%",
+    "states": { "warning": 80, "critical": 90 }, "tooltip-format": "Disk: {used} used of {total}"
+  },
+  "memory": {
+    "interval": 10, "format": "󰍛", "format-alt": "󰍛 {percentage}%",
+    "states": { "warning": 75, "critical": 85 }, "tooltip-format": "Memory: {used:0.1f} GiB used"
+  },
+  "group/system": { "orientation": "horizontal", "modules": ["cpu"] },
+  "cpu": {
+    "interval": 10, "format": "󰻠", "format-alt": "󰻠 {usage}%",
+    "states": { "warning": 75, "critical": 90 }, "tooltip-format": "CPU: {usage}%"
+  },
+  "idle_inhibitor": {
+    "format": "{icon}", "format-icons": { "activated": "󰛨", "deactivated": "󰛩" },
+    "tooltip-format-activated": "Idle inhibition enabled",
+    "tooltip-format-deactivated": "Normal idle behavior"
+  },
+  "hyprland/workspaces": {
+    "format": "{icon} {windows}", "on-click": "activate",
+    "persistent-workspaces": { "*": 5 }, "window-rewrite-default": "󰊠",
+    "window-rewrite": { "kitty": "󰆍", "thunar": "", "firefox": "󰈹", "zed": "󰨞" },
+    "format-icons": {
+      "active": "󰮯", "special": "󱁂", "default": "󰊠", "urgent": "󰧵", "empty": ""
+    },
+    "show-special": true, "all-outputs": true
+  },
+  "group/audio": {
+    "orientation": "horizontal",
+    "drawer": { "transition-duration": 650, "transition-left-to-right": false },
+    "modules": ["pulseaudio", "pulseaudio/slider", "pulseaudio#microphone"]
+  },
+  "pulseaudio": {
+    "format": "{icon}", "format-muted": "", "format-icons": { "default": ["", "", ""] },
+    "on-click": "pavucontrol", "tooltip-format": "Output: {volume}%"
+  },
+  "pulseaudio#microphone": {
+    "format": "{format_source}", "format-source": "", "format-source-muted": "",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+  },
+  "pulseaudio/slider": { "min": 0, "max": 100, "orientation": "horizontal" },
+  "network": {
+    "format-wifi": "{icon}", "format-ethernet": "󰈀", "format-linked": "󱘖",
+    "format-disconnected": "󰤣", "format-disabled": "󰤮",
+    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+    "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}/{cidr}",
+    "tooltip-format-ethernet": "{ifname}\n{ipaddr}/{cidr}",
+    "tooltip-format-disconnected": "No connection", "on-click": "nm-connection-editor"
+  },
+  "clock": {
+    "format": "󰃱 <span size='11pt'>{:%H.%M}</span>",
+    "format-alt": "󰃱 <span size='11pt'>{:%d %B %Y}</span>",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>"
+  },
+  "group/tray-group": {
+    "orientation": "horizontal",
+    "drawer": { "transition-duration": 500, "transition-left-to-right": false },
+    "modules": ["custom/tray-arrow", "tray"]
+  },
+  "custom/tray-arrow": { "format": "󰏖", "tooltip": false },
+  "tray": { "icon-size": 16, "spacing": 10, "show-passive-items": true }
+}

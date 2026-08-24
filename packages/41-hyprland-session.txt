@@ -1,0 +1,22 @@
+# Hyprland session and deliberately selected desktop components.
+hyprland
+kitty
+ttf-jetbrains-mono-nerd
+waybar
+fuzzel
+mako
+hyprpaper
+hyprlock
+hypridle
+hyprpolkitagent
+xdg-desktop-portal-hyprland
+xdg-desktop-portal-gtk
+xorg-xwayland
+qt5-wayland
+qt6-wayland
+thunar
+pavucontrol
+network-manager-applet
+wl-clipboard
+grim
+slurp
