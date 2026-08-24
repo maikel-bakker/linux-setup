@@ -1,0 +1,3 @@
+# Official repository packages for the browser layer and reviewed AUR builds.
+base-devel
+firefox

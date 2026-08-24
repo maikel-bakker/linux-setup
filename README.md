@@ -89,3 +89,12 @@ Apply and manually test the session lock before enabling idle timers:
 ./scripts/apply-lock-config
 hyprlock
 ```
+
+Install the selected browsers after the graphical session is working:
+
+```sh
+sudo ./scripts/install-packages packages/42-browsers.txt
+```
+
+Google Chrome additionally follows the review-first AUR procedure in
+`docs/10-browsers.md`.

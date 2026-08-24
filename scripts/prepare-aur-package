@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if (( EUID == 0 )); then
+  printf 'Run this script as a normal user, not as root.\n' >&2
+  exit 1
+fi
+
+mode="prepare"
+if [[ "${1:-}" == "--install" ]]; then
+  mode="install"
+  shift
+fi
+
+if (( $# != 1 )); then
+  printf 'Usage: %s [--install] <package-base>\n' "$0" >&2
+  exit 1
+fi
+
+package_base="$1"
+if [[ ! "$package_base" =~ ^[a-z0-9@._+-]+$ ]]; then
+  printf 'Invalid AUR package base: %s\n' "$package_base" >&2
+  exit 1
+fi
+
+cache_root="${XDG_CACHE_HOME:-$HOME/.cache}/linux-setup/aur"
+build_directory="$cache_root/$package_base"
+aur_url="https://aur.archlinux.org/$package_base.git"
+
+mkdir -p "$cache_root"
+
+if [[ "$mode" == "prepare" ]]; then
+  if [[ -e "$build_directory" ]]; then
+    printf 'Refusing to replace existing review directory: %s\n' "$build_directory" >&2
+    printf 'Remove it manually after preserving any review notes, then retry.\n' >&2
+    exit 1
+  fi
+
+  git clone -- "$aur_url" "$build_directory"
+
+  printf '\nAUR files are user-produced and are not trusted by this script.\n'
+  printf 'Review every file in: %s\n' "$build_directory"
+  printf 'Useful commands:\n'
+  printf '  cd %q\n' "$build_directory"
+  printf '  git log --show-signature -1\n'
+  printf '  less PKGBUILD\n'
+  printf 'After review, verify, build, and install with:\n'
+  printf '  %q --install %q\n' "$0" "$package_base"
+  exit 0
+fi
+
+if [[ ! -d "$build_directory/.git" ]]; then
+  printf 'No prepared review checkout found: %s\n' "$build_directory" >&2
+  printf 'Run %q %q first.\n' "$0" "$package_base" >&2
+  exit 1
+fi
+
+if [[ "$(git -C "$build_directory" remote get-url origin)" != "$aur_url" ]]; then
+  printf 'Unexpected Git origin in review checkout; refusing to build.\n' >&2
+  exit 1
+fi
+
+if ! git -C "$build_directory" diff --quiet || \
+    ! git -C "$build_directory" diff --cached --quiet; then
+  printf 'Tracked AUR files changed after checkout; review them again before building.\n' >&2
+  exit 1
+fi
+
+printf 'Building reviewed AUR commit %s\n' \
+  "$(git -C "$build_directory" rev-parse --short HEAD)"
+(
+  cd "$build_directory"
+  makepkg --verifysource
+  makepkg -si
+)

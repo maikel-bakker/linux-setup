@@ -42,6 +42,9 @@ Implemented inside the VM:
   to `Super+F`: see decision record 0011.
 - Rofi 2.0 replaces Fuzzel as the native Wayland application launcher on
   `Super+Space`, with a managed Catppuccin Mocha theme: see decision record 0012.
+- Firefox and Google Chrome are selected as the browser layer. Chrome uses a
+  review-first AUR workflow rather than an automatic helper: see
+  `docs/10-browsers.md` and decision record 0013.
 
 ## Host networking prerequisite
 
