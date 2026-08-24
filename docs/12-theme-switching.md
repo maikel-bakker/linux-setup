@@ -48,8 +48,9 @@ color preference, and reloads running components where supported.
 - No theme may contain executable hooks, credentials, or downloaded artwork.
 - Zed extensions are declared by identifier; their downloaded data remains in
   Zed's local data directory and outside Git.
-- Wallpapers are deferred until an original or appropriately licensed asset is
-  selected for each theme.
+- Wallpaper assets are stored separately under `assets/wallpapers/`, with
+  creator, source, and copyright recorded alongside them. They are not yet
+  applied automatically by the switcher.
 
 ## Lab validation
 

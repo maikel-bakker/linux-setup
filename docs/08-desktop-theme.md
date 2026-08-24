@@ -42,10 +42,12 @@ be added only with an explicit confirmation menu.
 
 ## Wallpaper
 
-The initial palette uses Hyprland's plain background. An original bitmap
-wallpaper is deferred because the image-generation facility was unavailable in
-the session. Do not add downloaded artwork without recording its source and
-license, and never store credentials for image services in the repository.
+The initial palette uses Hyprland's plain background. The first repository-owned
+wallpaper candidate is `assets/wallpapers/desert-catppuccin.png`, photographed
+and created by Maikel Bakker; its copyright notice is recorded beside the
+asset. It is deliberately not wired into Hyprland yet. Do not add downloaded
+artwork without recording its source and license, and never store credentials
+for image services in the repository.
 
 ## Lab validation
 
