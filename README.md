@@ -82,3 +82,10 @@ Apply the managed Catppuccin Mocha theme after validating the first session:
 ```sh
 ./scripts/apply-desktop-theme
 ```
+
+Apply and manually test the session lock before enabling idle timers:
+
+```sh
+./scripts/apply-lock-config
+hyprlock
+```

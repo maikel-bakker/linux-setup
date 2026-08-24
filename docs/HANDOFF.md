@@ -35,6 +35,9 @@ Implemented inside the VM:
   is running as a crash-resistant user service: see `docs/08-desktop-theme.md`.
 - The managed Waybar configuration is now adapted from the MIT-licensed Athena
   design. Its Nerd Font glyphs, drawers, and controls are working in the lab.
+- Hyprlock authentication is validated, Hypridle is enabled and active with the
+  managed five-minute lock and ten-minute display timeout rules, and `Super+L`
+  is configured: see `docs/09-session-locking.md`.
 
 ## Host networking prerequisite
 
@@ -42,12 +45,12 @@ The physical host runs UFW with default-deny input/forward policy. The VM networ
 
 ## Current next action
 
-Configure and safely test Hyprlock/Hypridle. The Athena-inspired capsule layout,
-drawers, Nerd Font glyphs, and controls are installed and visually validated.
-Wallpaper generation was unavailable and is deferred. Automatic session
-startup, scripted development workspaces, theme switching, and safe power
-controls remain later sublayers. Authentication remains interactive, and API
-keys must never be committed.
+Verify the live `Super+L` binding and the Waybar idle-inhibitor toggle. Then
+choose the next graphical sublayer: automatic session startup or the first
+development applications/workspace workflow. Wallpaper generation was
+unavailable and is deferred. Theme switching and safe power controls remain
+later sublayers. Authentication remains interactive, and API keys must never be
+committed.
 
 ## How to continue
 

@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+repository_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+target_directory="$HOME/.config/hypr"
+
+link_managed_file() {
+  local source_file="$1"
+  local target_file="$2"
+
+  mkdir -p "$(dirname -- "$target_file")"
+
+  if [[ -e "$target_file" && ! -L "$target_file" ]]; then
+    if cmp --silent "$source_file" "$target_file"; then
+      rm "$target_file"
+    else
+      printf 'Refusing to overwrite existing file: %s\n' "$target_file" >&2
+      printf 'Review or back it up first, then run this script again.\n' >&2
+      exit 1
+    fi
+  fi
+
+  ln -sfn "$source_file" "$target_file"
+  printf 'Linked %s\n' "$target_file"
+}
+
+if ! command -v hyprlock > /dev/null || ! command -v hypridle > /dev/null; then
+  printf 'Install packages/41-hyprland-session.txt first.\n' >&2
+  exit 1
+fi
+
+link_managed_file "$repository_root/dotfiles/hypr/hyprlock.conf" \
+  "$target_directory/hyprlock.conf"
+link_managed_file "$repository_root/dotfiles/hypr/hypridle.conf" \
+  "$target_directory/hypridle.conf"
+
+printf 'Applied lock and idle configs. Test hyprlock manually before enabling hypridle.\n'

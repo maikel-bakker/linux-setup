@@ -56,6 +56,7 @@ hl.bind(main_mod .. " + SPACE", hl.dsp.exec_cmd(launcher))
 hl.bind(main_mod .. " + E", hl.dsp.exec_cmd(file_manager))
 hl.bind(main_mod .. " + W", hl.dsp.window.close())
 hl.bind(main_mod .. " + V", hl.dsp.window.float({ action = "toggle" }))
+hl.bind(main_mod .. " + L", hl.dsp.exec_cmd("pidof hyprlock || hyprlock"))
 hl.bind(main_mod .. " + M", hl.dsp.exit())
 
 hl.bind(main_mod .. " + left", hl.dsp.focus({ direction = "left" }))
