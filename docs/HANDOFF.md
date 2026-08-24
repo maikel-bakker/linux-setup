@@ -46,6 +46,12 @@ Implemented inside the VM:
 - Firefox and Google Chrome are selected as the browser layer. Chrome uses a
   review-first AUR workflow rather than an automatic helper: see
   `docs/10-browsers.md` and decision record 0013.
+- Zed is selected from Arch's official repository, with the lab-specific
+  `vulkan-virtio` provider separated from the portable editor manifest: see
+  `docs/11-zed-editor.md` and decision record 0015.
+- Zed package installation and Rofi discovery are validated. Its renderer falls
+  back to llvmpipe because the VM does not expose accelerated Vulkan; native Zed
+  rendering remains a required physical-host test with `vulkan-radeon`.
 
 ## Host networking prerequisite
 
@@ -53,12 +59,12 @@ The physical host runs UFW with default-deny input/forward policy. The VM networ
 
 ## Current next action
 
-Verify the live `Super+L` binding and the Waybar idle-inhibitor toggle. Then
-choose the next graphical sublayer: automatic session startup or the first
-development applications/workspace workflow. Wallpaper generation was
-unavailable and is deferred. Theme switching and safe power controls remain
-later sublayers. Authentication remains interactive, and API keys must never be
-committed.
+Configure the portable Zed settings after reviewing the existing configuration
+from the other desktop, then build the first development workspace workflow.
+Automatic session startup remains a later graphical sublayer. Wallpaper
+generation was unavailable and is deferred. Theme switching and safe power
+controls remain later sublayers. Authentication remains interactive, and API
+keys must never be committed.
 
 ## How to continue
 
@@ -71,4 +77,4 @@ Start Codex from the VM repository and say:
 - Display manager versus TTY session startup.
 - Hyprland wallpaper, theme switching, and persisted workspace/layout workflow.
 - Secure Boot, TPM unlocking, snapshots/backup tooling, and GPU passthrough.
-- AUR workflow, Zed installation, and additional development tooling.
+- Additional development tooling and Zed configuration.

@@ -1,0 +1,2 @@
+# Zed editor. Install the Vulkan driver appropriate for the machine as well.
+zed

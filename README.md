@@ -98,3 +98,11 @@ sudo ./scripts/install-packages packages/42-browsers.txt
 
 Google Chrome additionally follows the review-first AUR procedure in
 `docs/10-browsers.md`.
+
+Install Zed with the Vulkan driver appropriate for the machine. In `arch-lab`:
+
+```sh
+sudo ./scripts/install-packages \
+  packages/43-zed-editor.txt \
+  packages/lab/43-zed-editor.txt
+```
