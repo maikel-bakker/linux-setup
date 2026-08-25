@@ -1,0 +1,4 @@
+# Hardware-specific Vulkan stack for the physical Radeon RX 6600 XT.
+# Do not install this in the Virtio-based lab.
+vulkan-radeon
+vulkan-tools
