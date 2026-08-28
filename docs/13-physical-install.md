@@ -23,6 +23,39 @@ to temporarily disconnect the current Arch drive during installation, but only
 if you can positively identify the physical drives. Otherwise leave both drives
 connected and use the target-verification gate below.
 
+## Prepare the installation USB
+
+Download the current ISO and its detached signature from the official
+[Arch Linux download page](https://archlinux.org/download/). Do not reuse the
+older VM ISO for the physical installation. From the current Arch system,
+verify the downloaded ISO before writing it:
+
+```sh
+pacman-key -v /path/to/archlinux-YYYY.MM.DD-x86_64.iso.sig
+```
+
+Use an otherwise-disposable USB flash drive of at least 4 GiB; 8 GiB or larger
+is recommended. Plug it in, then identify its **whole-disk** device path:
+
+```sh
+lsblk -d -o NAME,PATH,SIZE,MODEL,SERIAL,TRAN,RM,HOTPLUG
+```
+
+It should be a removable USB device such as `/dev/sdX`, never either internal
+NVMe disk. Unmount any partitions the desktop mounted automatically, then write
+the verified ISO to the whole USB disk. This intentionally erases that USB:
+
+```sh
+sudo dd if=/path/to/archlinux-YYYY.MM.DD-x86_64.iso \
+  of=/dev/sdX bs=4M conv=fsync status=progress
+sync
+```
+
+Do not add a partition number such as `/dev/sdX1` to the output path. Leave the
+drive connected, reboot, choose it from the firmware's one-time boot menu, and
+confirm that the ISO boots in UEFI mode. Official Arch installation images do
+not boot with Secure Boot enabled; disable Secure Boot temporarily if required.
+
 ## Target-verification gate
 
 Boot a current Arch ISO in UEFI mode. Before any format command, inspect every
