@@ -41,8 +41,9 @@ systemctl --user enable --now hypridle.service
 systemctl --user --no-pager status hypridle.service
 ```
 
-Then verify `Super+L`. The Waybar idle-inhibitor capsule can temporarily suppress
-both timers, which is useful while watching video or presenting.
+Then verify `Super+L`. Applications can request idle inhibition through the
+normal Wayland and systemd mechanisms when needed for video or presentations;
+Waybar does not expose a manual override.
 
 ## Lab validation
 

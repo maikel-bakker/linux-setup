@@ -4,12 +4,12 @@
 
 * {
   margin: 0; padding: 0; min-height: 0; border: none; border-radius: 0;
-  font-family: "JetBrainsMono Nerd Font"; font-size: 13px;
+  font-family: "JetBrainsMono Nerd Font"; font-size: 14px;
 }
 window#waybar { background: transparent; color: @text; }
 
 #distro-group, #storage, #system, #audio, #tray-group, #bluetooth, #network,
-#idle_inhibitor, #workspaces, #clock {
+#workspaces, #clock {
   margin: 4px 5px; background-color: alpha(@base, 0.96);
   border: 1px solid @surface0; border-radius: 20px; color: @text;
 }
@@ -19,8 +19,6 @@ window#waybar { background: transparent; color: @text; }
 #custom-files { color: @yellow; padding: 0 10px; }
 #disk, #memory, #cpu { padding: 0 8px; }
 
-#idle_inhibitor { padding: 6px 14px; color: @subtext0; }
-#idle_inhibitor.activated { color: @yellow; }
 #workspaces { padding: 6px; }
 #workspaces button {
   min-width: 32px; padding: 0 4px; margin: 0 2px; background: transparent;

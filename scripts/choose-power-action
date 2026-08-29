@@ -6,10 +6,13 @@ if ! command -v rofi > /dev/null; then
   exit 1
 fi
 
-selection="$(printf 'Power off\nRestart\nSleep\nLog out\nCancel\n' | \
+selection="$(printf 'Power off\nLock\nRestart\nSleep\nLog out\nCancel\n' | \
   rofi -dmenu -no-custom -selected-row 0 -p 'Power menu')" || exit 0
 
 case "$selection" in
+  'Lock')
+    pidof hyprlock > /dev/null || hyprlock
+    ;;
   'Sleep')
     systemctl suspend
     ;;

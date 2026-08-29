@@ -2,18 +2,24 @@
 set -euo pipefail
 
 repository_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
-source_file="$repository_root/dotfiles/zsh/.zshrc"
-target_file="$HOME/.zshrc"
 
-if [[ -e "$target_file" && ! -L "$target_file" ]]; then
-  if cmp --silent "$source_file" "$target_file"; then
-    rm "$target_file"
-  else
-    printf 'Refusing to overwrite existing file: %s\n' "$target_file" >&2
-    printf 'Review or back it up first, then run this script again.\n' >&2
-    exit 1
+link_managed_file() {
+  local source_file="$1"
+  local target_file="$2"
+
+  if [[ -e "$target_file" && ! -L "$target_file" ]]; then
+    if cmp --silent "$source_file" "$target_file"; then
+      rm "$target_file"
+    else
+      printf 'Refusing to overwrite existing file: %s\n' "$target_file" >&2
+      printf 'Review or back it up first, then run this script again.\n' >&2
+      exit 1
+    fi
   fi
-fi
 
-ln -sfn "$source_file" "$target_file"
-printf 'Linked %s to the repository-managed Zsh configuration.\n' "$target_file"
+  ln -sfn "$source_file" "$target_file"
+  printf 'Linked %s to the repository-managed Zsh configuration.\n' "$target_file"
+}
+
+link_managed_file "$repository_root/dotfiles/zsh/.zshrc" "$HOME/.zshrc"
+link_managed_file "$repository_root/dotfiles/zsh/.zprofile" "$HOME/.zprofile"

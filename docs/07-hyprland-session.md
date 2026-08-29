@@ -35,9 +35,15 @@ sudo ./scripts/install-packages packages/41-hyprland-session.txt
 The apply script links `~/.config/hypr/hyprland.lua` to the repository. It will
 not overwrite a different regular file.
 
-## First launch
+## Session launch
 
-No display manager is selected yet. From the VM's local TTY—not an SSH shell—run:
+No display manager or automatic login is selected. The managed Zsh login profile
+starts Hyprland automatically through the packaged watchdog after `mb` logs in
+on `tty1`. Authentication therefore remains at the normal TTY login prompt.
+SSH and secondary TTYs do not start a graphical session and remain available
+for recovery.
+
+For a manual launch from another local TTY—not an SSH shell—run:
 
 ```sh
 start-hyprland
@@ -70,8 +76,9 @@ with `Super+M` and inspect the journal if the session fails:
 journalctl --user -b --no-pager | tail -200
 ```
 
-`Super+Escape` opens a Rofi power menu ordered as **Power off**, **Restart**,
-**Sleep**, **Log out**, and **Cancel**, with Power off preselected. Sleep runs
+`Super+Escape` opens a Rofi power menu ordered as **Power off**, **Lock**,
+**Restart**, **Sleep**, **Log out**, and **Cancel**, with Power off preselected.
+Lock launches Hyprlock unless it is already running, Sleep runs
 `systemctl suspend`, Log out cleanly exits Hyprland, Restart runs
 `systemctl reboot`, and Power off runs `systemctl poweroff`. Pressing Escape
 dismisses the menu without taking action. Apply the desktop theme after the

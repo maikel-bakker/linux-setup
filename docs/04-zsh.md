@@ -15,4 +15,14 @@ sudo ./scripts/install-packages packages/20-shell.txt
 sudo ./scripts/configure-shell mb
 ```
 
-The apply script creates a symlink from `~/.zshrc` to the repository-managed file. It safely replaces an identical regular copy; it refuses to overwrite a different existing file.
+The apply script links both `~/.zshrc` and `~/.zprofile` to their
+repository-managed files. It safely replaces an identical regular copy and
+refuses to overwrite a different existing file.
+
+The login profile starts Hyprland through `start-hyprland` only after a local
+login on `tty1`. It does not affect SSH, secondary TTYs, or terminals inside the
+graphical session. This keeps authentication interactive while making the
+desktop the normal post-login environment and leaves another TTY available for
+recovery. It exports `~/.local/bin` before starting Hyprland so repository-owned
+session helpers are available to the compositor at startup; `.zshrc` adds the
+same path only when it is not already present.

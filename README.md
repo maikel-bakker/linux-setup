@@ -90,8 +90,8 @@ linux-setup-theme catppuccin-mocha
 linux-setup-theme-menu
 ```
 
-Apply the managed Rofi power menu for sleep, logout, restart, and confirmed
-poweroff, then invoke it with `Super+Escape`:
+Apply the managed Rofi power menu for lock, sleep, logout, restart, and
+confirmed poweroff, then invoke it with `Super+Escape`:
 
 ```sh
 ./scripts/apply-desktop-theme

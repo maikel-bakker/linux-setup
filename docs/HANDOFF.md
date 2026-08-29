@@ -70,10 +70,10 @@ Review `docs/13-physical-install.md` before making the first real-hardware
 installation. It targets the former Windows disk while retaining the current
 Arch disk as a fallback and adds a physical-only Radeon Vulkan manifest. Build
 the first development workspace workflow after the physical base is working.
-Automatic session startup, gaming, snapshots/backups, and power actions beyond
-the Rofi sleep, logout, restart, and confirmed poweroff controls remain later
-sublayers. Authentication remains interactive, and API keys must never be
-committed.
+Gaming, snapshots/backups, and power actions beyond the Rofi lock, sleep,
+logout, restart, and confirmed poweroff controls remain later sublayers.
+Hyprland now starts after an interactive `tty1` login; authentication remains
+interactive, and API keys must never be committed.
 
 ## How to continue
 
