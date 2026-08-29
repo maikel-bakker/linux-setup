@@ -90,6 +90,14 @@ linux-setup-theme catppuccin-mocha
 linux-setup-theme-menu
 ```
 
+Apply the managed Rofi power menu for sleep, logout, restart, and confirmed
+poweroff, then invoke it with `Super+Escape`:
+
+```sh
+./scripts/apply-desktop-theme
+linux-setup-power-menu
+```
+
 Apply and manually test the session lock before enabling idle timers:
 
 ```sh

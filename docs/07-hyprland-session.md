@@ -55,6 +55,7 @@ Useful initial bindings:
 | `Super+Space` | Open Rofi |
 | `Super+F` | Open Nautilus |
 | `Super+W` | Close the focused window |
+| `Super+Escape` | Open the power menu |
 | `Super+M` | Exit Hyprland |
 | `Super+1` … `Super+0` | Select workspace 1 … 10 |
 | `Super+Shift+1` … `Super+Shift+0` | Move a window to a workspace |
@@ -67,6 +68,17 @@ with `Super+M` and inspect the journal if the session fails:
 
 ```sh
 journalctl --user -b --no-pager | tail -200
+```
+
+`Super+Escape` opens a Rofi power menu ordered as **Power off**, **Restart**,
+**Sleep**, **Log out**, and **Cancel**, with Power off preselected. Sleep runs
+`systemctl suspend`, Log out cleanly exits Hyprland, Restart runs
+`systemctl reboot`, and Power off runs `systemctl poweroff`. Pressing Escape
+dismisses the menu without taking action. Apply the desktop theme after the
+repository is updated so the helper is linked into `~/.local/bin`:
+
+```sh
+./scripts/apply-desktop-theme
 ```
 
 ## Installation validation

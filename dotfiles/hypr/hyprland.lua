@@ -7,6 +7,7 @@ local file_manager = "nautilus"
 local main_mod = "SUPER"
 local theme = dofile(os.getenv("HOME") .. "/.config/hypr/theme.lua")
 local theme_chooser = "linux-setup-theme-menu"
+local power_menu = "linux-setup-power-menu"
 
 hl.monitor({
     output = "",
@@ -62,6 +63,7 @@ hl.bind(main_mod .. " + W", hl.dsp.window.close())
 hl.bind(main_mod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(main_mod .. " + L", hl.dsp.exec_cmd("pidof hyprlock || hyprlock"))
 hl.bind(main_mod .. " + M", hl.dsp.exit())
+hl.bind(main_mod .. " + ESCAPE", hl.dsp.exec_cmd(power_menu))
 
 hl.bind(main_mod .. " + left", hl.dsp.focus({ direction = "left" }))
 hl.bind(main_mod .. " + right", hl.dsp.focus({ direction = "right" }))
