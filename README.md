@@ -26,7 +26,7 @@ Snapshots are still useful for rollback. They are not a substitute for a documen
 | 3 | Users, security, secrets, permissions | In progress |
 | 4 | Display, compositor/window manager, session | In progress |
 | 5 | Shell, terminal, editor, web development | In progress |
-| 6 | Gaming, peripherals, media | Planned |
+| 6 | Gaming, peripherals, media | In progress |
 | 7 | Backups, upgrades, monitoring, recovery | Planned |
 
 ## Repository conventions
@@ -112,4 +112,19 @@ Install Zed with the Vulkan driver appropriate for the machine. In `arch-lab`:
 sudo ./scripts/install-packages \
   packages/43-zed-editor.txt \
   packages/lab/43-zed-editor.txt
+```
+
+Install and enable Bluetooth support on physical machines, then pair devices
+interactively as documented in `docs/14-bluetooth.md`:
+
+```sh
+sudo ./scripts/install-packages packages/50-bluetooth.txt
+sudo ./scripts/configure-bluetooth
+```
+
+The physical workstation's controller selection is applied separately after
+both the onboard controller and external receiver have been identified:
+
+```sh
+sudo ./scripts/configure-bluetooth-adapters
 ```

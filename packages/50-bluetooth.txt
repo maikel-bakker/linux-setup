@@ -1,0 +1,4 @@
+# Bluetooth daemon, command-line tools, and graphical device manager.
+bluez
+bluez-utils
+blueman

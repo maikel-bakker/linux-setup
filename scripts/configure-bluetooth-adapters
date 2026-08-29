@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if (( EUID != 0 )); then
+  printf 'Run with sudo: sudo %s\n' "$0" >&2
+  exit 1
+fi
+
+repo_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+rule_source="$repo_dir/system/udev/rules.d/80-disable-onboard-bluetooth.rules"
+rule_target="/etc/udev/rules.d/80-disable-onboard-bluetooth.rules"
+
+usb_device_present() {
+  local vendor="$1"
+  local product="$2"
+  local device
+
+  for device in /sys/bus/usb/devices/*; do
+    [[ -f "$device/idVendor" && -f "$device/idProduct" ]] || continue
+    if [[ "$(< "$device/idVendor")" == "$vendor" &&
+          "$(< "$device/idProduct")" == "$product" ]]; then
+      return 0
+    fi
+  done
+  return 1
+}
+
+if ! usb_device_present 0a5c 21e8; then
+  printf 'External Broadcom Bluetooth receiver 0a5c:21e8 is not connected; refusing to disable the onboard controller.\n' >&2
+  exit 1
+fi
+
+if ! usb_device_present 13d3 3586; then
+  printf 'Onboard Realtek Bluetooth controller 13d3:3586 was not found; refusing to install a rule for different hardware.\n' >&2
+  exit 1
+fi
+
+install -Dm644 "$rule_source" "$rule_target"
+udevadm control --reload
+
+printf 'Installed %s. Reboot to disable onboard Bluetooth and retain the external receiver.\n' "$rule_target"

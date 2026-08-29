@@ -8,7 +8,7 @@
 }
 window#waybar { background: transparent; color: @text; }
 
-#distro-group, #storage, #system, #audio, #tray-group, #network,
+#distro-group, #storage, #system, #audio, #tray-group, #bluetooth, #network,
 #idle_inhibitor, #workspaces, #clock {
   margin: 4px 5px; background-color: alpha(@base, 0.96);
   border: 1px solid @surface0; border-radius: 20px; color: @text;
@@ -44,6 +44,9 @@ window#waybar { background: transparent; color: @text; }
   min-height: 12px; min-width: 12px; margin: -2px 0; border-radius: 100%; background-color: @blue;
 }
 
+#bluetooth { padding: 6px 14px; color: @blue; }
+#bluetooth.connected { color: @green; }
+#bluetooth.disabled, #bluetooth.off, #bluetooth.no-controller { color: @overlay0; }
 #network { padding: 6px 14px; color: @blue; }
 #network.disconnected, #network.disabled, #cpu.critical, #disk.critical, #memory.critical { color: @red; }
 #cpu.warning, #disk.warning, #memory.warning { color: @yellow; }

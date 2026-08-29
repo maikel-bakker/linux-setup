@@ -10,7 +10,7 @@
   "spacing": 6,
   "modules-left": ["group/distro-group", "group/storage", "group/system"],
   "modules-center": ["idle_inhibitor", "hyprland/workspaces"],
-  "modules-right": ["group/audio", "network", "clock", "group/tray-group"],
+  "modules-right": ["group/audio", "bluetooth", "network", "clock", "group/tray-group"],
   "group/distro-group": {
     "orientation": "horizontal",
     "drawer": { "transition-duration": 650, "transition-left-to-right": true },
@@ -61,6 +61,16 @@
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
   },
   "pulseaudio/slider": { "min": 0, "max": 100, "orientation": "horizontal" },
+  "bluetooth": {
+    "format": "󰂯", "format-on": "󰂯", "format-off": "󰂲",
+    "format-disabled": "󰂲", "format-no-controller": "󰂲",
+    "format-connected": "󰂱", "format-connected-battery": "󰂱 {device_battery_percentage}%",
+    "on-click": "blueman-manager",
+    "tooltip-format": "{controller_alias}: {status}",
+    "tooltip-format-connected": "{controller_alias}: {num_connections} connected\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}",
+    "tooltip-format-enumerate-connected-battery": "{device_alias}: {device_battery_percentage}%"
+  },
   "network": {
     "format-wifi": "{icon}", "format-ethernet": "󰈀", "format-linked": "󱘖",
     "format-disconnected": "󰤣", "format-disabled": "󰤮",

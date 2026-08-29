@@ -197,6 +197,15 @@ sudo ./scripts/install-packages packages/43-zed-editor.txt packages/physical/43-
 ./scripts/apply-zed-config
 ```
 
+Install Bluetooth support when the machine has Bluetooth peripherals:
+
+```sh
+sudo ./scripts/install-packages packages/50-bluetooth.txt
+sudo ./scripts/configure-bluetooth
+```
+
+Pair devices using the machine-local procedure in `docs/14-bluetooth.md`.
+
 Install Firefox and the remaining browser/AUR layer only after the base desktop
 works. Install global npm tools and authenticate Codex locally; neither API
 keys nor credentials belong in the repository.

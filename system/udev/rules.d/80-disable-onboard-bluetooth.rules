@@ -1,0 +1,3 @@
+# Disable the motherboard Realtek Bluetooth function. Wi-Fi is a separate PCIe
+# device. Keep the external Broadcom 0a5c:21e8 Bluetooth receiver enabled.
+ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="13d3", ATTR{idProduct}=="3586", ATTR{authorized}="0"

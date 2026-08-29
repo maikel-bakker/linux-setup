@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if (( EUID != 0 )); then
+  printf 'Run with sudo: sudo %s\n' "$0" >&2
+  exit 1
+fi
+
+if ! command -v bluetoothctl > /dev/null; then
+  printf 'Bluetooth tools are not installed. Install packages/50-bluetooth.txt first.\n' >&2
+  exit 1
+fi
+
+if ! command -v blueman-manager > /dev/null; then
+  printf 'Blueman is not installed. Install packages/50-bluetooth.txt first.\n' >&2
+  exit 1
+fi
+
+systemctl enable --now bluetooth.service
+
+printf 'Enabled and started bluetooth.service. Launch blueman-manager as your normal user to pair devices.\n'
