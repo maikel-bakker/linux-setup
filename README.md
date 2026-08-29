@@ -111,7 +111,7 @@ Install the selected browsers after the graphical session is working:
 sudo ./scripts/install-packages packages/42-browsers.txt
 ```
 
-Google Chrome additionally follows the review-first AUR procedure in
+Google Chrome and Brave additionally follow the review-first AUR procedure in
 `docs/10-browsers.md`.
 
 Install Zed with the Vulkan driver appropriate for the machine. In `arch-lab`:

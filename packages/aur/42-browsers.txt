@@ -1,2 +1,3 @@
 # AUR package bases. Review their build files before every build or update.
 google-chrome
+brave-bin
