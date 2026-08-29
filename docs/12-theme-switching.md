@@ -52,7 +52,8 @@ where supported. The saved selection is restored whenever Hyprland starts.
 - Wallpaper assets are stored separately under `assets/wallpapers/`, with
   creator, source, and copyright recorded alongside them. A theme may opt in by
   providing a `wallpaper` file containing the repository-relative asset path.
-- Mocha assigns `desert-catppuccin.png`; Hyprpaper displays it in `cover` mode.
+- Mocha assigns `desert-catppuccin-darker.png`; Hyprpaper displays it in `cover`
+  mode.
   Latte has no assignment, so selecting it stops Hyprpaper and returns to the
   compositor's plain background.
 - Hyprpaper is skipped by default in virtual machines because the lab's QEMU

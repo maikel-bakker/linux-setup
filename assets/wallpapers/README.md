@@ -2,7 +2,7 @@
 
 ## Desert Catppuccin
 
-- File: `desert-catppuccin.png`
+- Files: `desert-catppuccin.png` and `desert-catppuccin-darker.png`
 - Creator and photographer: Maikel Bakker
 - Created: 2026
 - Copyright: © 2026 Maikel Bakker. All rights reserved.

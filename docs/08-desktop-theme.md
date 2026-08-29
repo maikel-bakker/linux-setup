@@ -42,7 +42,7 @@ be added only with an explicit confirmation menu.
 
 ## Wallpaper
 
-The Mocha theme uses `assets/wallpapers/desert-catppuccin.png`, photographed and
+The Mocha theme uses `assets/wallpapers/desert-catppuccin-darker.png`, photographed and
 created by Maikel Bakker; its copyright notice is recorded beside the asset.
 The theme switcher starts Hyprpaper and displays it in `cover` mode. Latte has
 no wallpaper assignment and stops Hyprpaper when selected. Do not add downloaded
