@@ -4,6 +4,8 @@
 local terminal = "kitty"
 local launcher = "rofi -show drun"
 local file_manager = "nautilus"
+local browser = "xdg-open https://"
+local bluetooth_manager = "blueman-manager"
 local main_mod = "SUPER"
 local theme = dofile(os.getenv("HOME") .. "/.config/hypr/theme.lua")
 local user_bin = os.getenv("HOME") .. "/.local/bin/"
@@ -62,17 +64,22 @@ hl.bind(main_mod .. " + RETURN", hl.dsp.exec_cmd(terminal))
 hl.bind(main_mod .. " + SPACE", hl.dsp.exec_cmd(launcher))
 hl.bind(main_mod .. " + CTRL + SPACE", hl.dsp.exec_cmd(theme_chooser))
 hl.bind(main_mod .. " + F", hl.dsp.exec_cmd(file_manager))
+hl.bind(main_mod .. " + B", hl.dsp.exec_cmd(browser))
+hl.bind(main_mod .. " + SHIFT + B", hl.dsp.exec_cmd(bluetooth_manager))
 hl.bind(main_mod .. " + W", hl.dsp.window.close())
 hl.bind(main_mod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(main_mod .. " + L", hl.dsp.exec_cmd("pidof hyprlock || hyprlock"))
 hl.bind(main_mod .. " + M", hl.dsp.exit())
 hl.bind(main_mod .. " + ESCAPE", hl.dsp.exec_cmd(power_menu))
 hl.bind("PRINT", hl.dsp.exec_cmd(screenshot))
+hl.bind(main_mod .. " + J", hl.dsp.layout("togglesplit"))
 
 hl.bind(main_mod .. " + left", hl.dsp.focus({ direction = "left" }))
 hl.bind(main_mod .. " + right", hl.dsp.focus({ direction = "right" }))
 hl.bind(main_mod .. " + up", hl.dsp.focus({ direction = "up" }))
 hl.bind(main_mod .. " + down", hl.dsp.focus({ direction = "down" }))
+hl.bind(main_mod .. " + SHIFT + left", hl.dsp.window.swap({ direction = "left" }))
+hl.bind(main_mod .. " + SHIFT + right", hl.dsp.window.swap({ direction = "right" }))
 
 for workspace = 1, 10 do
     local key = workspace % 10

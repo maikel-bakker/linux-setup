@@ -61,6 +61,8 @@ Useful initial bindings:
 | `Super+Enter` | Open Kitty |
 | `Super+Space` | Open Rofi |
 | `Super+F` | Open Nautilus |
+| `Super+B` | Open the default browser |
+| `Super+Shift+B` | Open the Bluetooth manager |
 | `Super+W` | Close the focused window |
 | `Super+Escape` | Open the power menu |
 | `Print` | Select, capture, and annotate a screen region |
@@ -68,6 +70,8 @@ Useful initial bindings:
 | `Super+1` … `Super+0` | Select workspace 1 … 10 |
 | `Super+Shift+1` … `Super+Shift+0` | Move a window to a workspace |
 | `Super` + arrow | Change focus |
+| `Super+Shift` + left/right arrow | Swap the focused window with its neighbor |
+| `Super+J` | Toggle the next tiled split between horizontal and vertical |
 | `Super` + left/right mouse drag | Move/resize a window |
 
 Validate Kitty, Rofi, Waybar, notifications, window tiling, keyboard/mouse
