@@ -69,6 +69,16 @@ verify, build, and install the unchanged checkout:
 Repeat the review whenever the AUR recipe changes. Do not commit the downloaded
 checkout, built packages, browser profiles, Brave Rewards state, or credentials.
 
+### Catppuccin theme
+
+Install the official Catppuccin Mocha theme from the Chrome Web Store:
+
+<https://chromewebstore.google.com/detail/bkkmolkhemgaeaeggcmfbghljjjoofoh>
+
+Brave supports Chromium themes from the Chrome Web Store. Select **Add to
+Brave** and confirm the installation. The selected theme is part of the local
+Brave profile and is intentionally not copied into this repository.
+
 ## Validation
 
 Launch all three browsers through Rofi. Confirm native Wayland rendering, audio,
