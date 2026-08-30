@@ -1,2 +1,3 @@
 # Interactive shell. Install this manifest when configuring the user environment.
 zsh
+ttf-jetbrains-mono-nerd

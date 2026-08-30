@@ -34,4 +34,9 @@ install_pinned_repo \
   85919cd1ffa7d2d5412f6d3fe437ebdbeeec4fc5 \
   "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
 
-printf 'Installed pinned Oh My Zsh and zsh-autosuggestions revisions.\n'
+install_pinned_repo \
+  https://github.com/romkatv/powerlevel10k.git \
+  3308262dfbd743b6e1d3956a2b5572f7a049d692 \
+  "$HOME/.oh-my-zsh/custom/themes/powerlevel10k"
+
+printf 'Installed pinned Oh My Zsh, zsh-autosuggestions, and Powerlevel10k revisions.\n'
