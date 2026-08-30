@@ -1,0 +1,2 @@
+# Graphical media applications from the official Arch repositories.
+spotify-launcher

@@ -63,6 +63,7 @@ Useful initial bindings:
 | `Super+F` | Open Nautilus |
 | `Super+B` | Open the default browser |
 | `Super+Shift+B` | Open the Bluetooth manager |
+| `Super+S` | Open Spotify |
 | `Super+W` | Close the focused window |
 | `Super+Escape` | Open the power menu |
 | `Print` | Select, capture, and annotate a screen region |

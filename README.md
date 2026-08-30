@@ -136,3 +136,10 @@ both the onboard controller and external receiver have been identified:
 ```sh
 sudo ./scripts/configure-bluetooth-adapters
 ```
+
+Install Spotify from Arch's official repositories after the graphical session
+is working:
+
+```sh
+sudo ./scripts/install-packages packages/51-media.txt
+```

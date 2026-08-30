@@ -6,6 +6,7 @@ local launcher = "rofi -show drun"
 local file_manager = "nautilus"
 local browser = "xdg-open https://"
 local bluetooth_manager = "blueman-manager"
+local spotify = "spotify-launcher"
 local main_mod = "SUPER"
 local theme = dofile(os.getenv("HOME") .. "/.config/hypr/theme.lua")
 local user_bin = os.getenv("HOME") .. "/.local/bin/"
@@ -66,6 +67,7 @@ hl.bind(main_mod .. " + CTRL + SPACE", hl.dsp.exec_cmd(theme_chooser))
 hl.bind(main_mod .. " + F", hl.dsp.exec_cmd(file_manager))
 hl.bind(main_mod .. " + B", hl.dsp.exec_cmd(browser))
 hl.bind(main_mod .. " + SHIFT + B", hl.dsp.exec_cmd(bluetooth_manager))
+hl.bind(main_mod .. " + S", hl.dsp.exec_cmd(spotify))
 hl.bind(main_mod .. " + W", hl.dsp.window.close())
 hl.bind(main_mod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(main_mod .. " + L", hl.dsp.exec_cmd("pidof hyprlock || hyprlock"))
