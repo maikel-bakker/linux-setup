@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+required_commands=(grim slurp satty wl-copy)
+for command_name in "${required_commands[@]}"; do
+  if ! command -v "$command_name" > /dev/null; then
+    printf 'Required screenshot command is not installed: %s\n' "$command_name" >&2
+    exit 1
+  fi
+done
+
+output_directory="$HOME/Pictures/Screenshots"
+mkdir -p "$output_directory"
+
+geometry="$(slurp)" || exit 0
+[[ -n "$geometry" ]] || exit 0
+
+grim -g "$geometry" -t ppm - | \
+  satty --filename - \
+    --fullscreen \
+    --copy-command wl-copy \
+    --output-filename "$output_directory/screenshot-%Y%m%d-%H%M%S.png"

@@ -17,6 +17,7 @@ The initial supporting components are:
 - Xwayland for applications that do not support Wayland natively;
 - Nautilus (GNOME Files) for graphical file management;
 - `wl-clipboard`, Grim, and Slurp for clipboard and screenshot primitives;
+- Satty for post-capture cropping and annotation;
 - Hyprpaper, Hyprlock, and Hypridle for later wallpaper, lock, and idle policy.
 
 Hyprlock and Hypridle are installed but intentionally not started by the first
@@ -62,6 +63,7 @@ Useful initial bindings:
 | `Super+F` | Open Nautilus |
 | `Super+W` | Close the focused window |
 | `Super+Escape` | Open the power menu |
+| `Print` | Select, capture, and annotate a screen region |
 | `Super+M` | Exit Hyprland |
 | `Super+1` … `Super+0` | Select workspace 1 … 10 |
 | `Super+Shift+1` … `Super+Shift+0` | Move a window to a workspace |
@@ -91,6 +93,16 @@ repository is updated so the helper is linked into `~/.local/bin`:
 Hyprland invokes repository-owned theme and power helpers through their managed
 absolute paths under `~/.local/bin`; session controls therefore do not depend on
 the compositor's inherited shell `PATH`.
+
+The Print key runs `linux-setup-screenshot`. Slurp selects a region, Grim emits
+an uncompressed capture to Satty, and Satty provides cropping and annotation.
+Press Enter or `Ctrl+C` in Satty to copy through `wl-copy`, `Ctrl+S` to save
+under `~/Pictures/Screenshots`, or Escape to cancel. Apply the desktop theme to
+link the helper after a repository update:
+
+```sh
+./scripts/apply-desktop-theme
+```
 
 ## Installation validation
 

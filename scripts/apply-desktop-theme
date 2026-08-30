@@ -61,6 +61,8 @@ link_managed_file "$repository_root/scripts/restore-theme" \
   "$HOME/.local/bin/linux-setup-theme-restore"
 link_managed_file "$repository_root/scripts/choose-power-action" \
   "$HOME/.local/bin/linux-setup-power-menu"
+link_managed_file "$repository_root/scripts/take-screenshot" \
+  "$HOME/.local/bin/linux-setup-screenshot"
 
 systemctl --user daemon-reload
 systemctl --user enable waybar.service

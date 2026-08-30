@@ -10,6 +10,7 @@ local user_bin = os.getenv("HOME") .. "/.local/bin/"
 local theme_chooser = user_bin .. "linux-setup-theme-menu"
 local power_menu = user_bin .. "linux-setup-power-menu"
 local theme_restore = user_bin .. "linux-setup-theme-restore"
+local screenshot = user_bin .. "linux-setup-screenshot"
 
 hl.monitor({
     output = "",
@@ -66,6 +67,7 @@ hl.bind(main_mod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(main_mod .. " + L", hl.dsp.exec_cmd("pidof hyprlock || hyprlock"))
 hl.bind(main_mod .. " + M", hl.dsp.exit())
 hl.bind(main_mod .. " + ESCAPE", hl.dsp.exec_cmd(power_menu))
+hl.bind("PRINT", hl.dsp.exec_cmd(screenshot))
 
 hl.bind(main_mod .. " + left", hl.dsp.focus({ direction = "left" }))
 hl.bind(main_mod .. " + right", hl.dsp.focus({ direction = "right" }))
