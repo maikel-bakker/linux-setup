@@ -6,8 +6,10 @@ local launcher = "rofi -show drun"
 local file_manager = "nautilus"
 local main_mod = "SUPER"
 local theme = dofile(os.getenv("HOME") .. "/.config/hypr/theme.lua")
-local theme_chooser = "linux-setup-theme-menu"
-local power_menu = "linux-setup-power-menu"
+local user_bin = os.getenv("HOME") .. "/.local/bin/"
+local theme_chooser = user_bin .. "linux-setup-theme-menu"
+local power_menu = user_bin .. "linux-setup-power-menu"
+local theme_restore = user_bin .. "linux-setup-theme-restore"
 
 hl.monitor({
     output = "",
@@ -49,7 +51,7 @@ hl.config({
 })
 
 hl.on("hyprland.start", function()
-    hl.exec_cmd("linux-setup-theme-restore")
+    hl.exec_cmd(theme_restore)
     hl.exec_cmd("systemctl --user start waybar.service")
     hl.exec_cmd("mako")
     hl.exec_cmd("systemctl --user start hyprpolkitagent.service")

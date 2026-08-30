@@ -88,6 +88,10 @@ repository is updated so the helper is linked into `~/.local/bin`:
 ./scripts/apply-desktop-theme
 ```
 
+Hyprland invokes repository-owned theme and power helpers through their managed
+absolute paths under `~/.local/bin`; session controls therefore do not depend on
+the compositor's inherited shell `PATH`.
+
 ## Installation validation
 
 Installed in `arch-lab` on 2026-07-28. The complete manifest was present,
