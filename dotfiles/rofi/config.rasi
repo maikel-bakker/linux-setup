@@ -50,6 +50,8 @@ listview {
     lines: 8;
     columns: 1;
     spacing: 4px;
+    padding: 0;
+    border: 0;
     scrollbar: false;
     fixed-height: false;
 }
@@ -60,8 +62,29 @@ element {
     border-radius: 8px;
 }
 
-element selected {
+element normal.normal,
+element alternate.normal {
+    background-color: transparent;
+    text-color: @theme-text;
+}
+
+element normal.active,
+element alternate.active {
+    background-color: transparent;
+    text-color: @theme-sky;
+}
+
+element normal.urgent,
+element alternate.urgent {
+    background-color: transparent;
+    text-color: @theme-accent;
+}
+
+element selected.normal,
+element selected.active,
+element selected.urgent {
     background-color: @theme-surface1;
+    text-color: @theme-sky;
 }
 
 element-icon {
@@ -72,6 +95,6 @@ element-text {
     vertical-align: 0.5;
 }
 
-element-text selected {
-    text-color: @theme-sky;
+entry {
+    text-color: @theme-text;
 }
