@@ -54,6 +54,16 @@ hl.config({
     },
 })
 
+-- Keep window transitions smooth, but slightly snappier than Hyprland's defaults.
+hl.curve("easy", { type = "spring", mass = 1, stiffness = 238.1191, dampening = 24.21279333 })
+hl.curve("easeOutCubic", { type = "bezier", points = { {0.33, 1}, {0.68, 1} } })
+hl.animation({ leaf = "windows", enabled = true, speed = 6, spring = "easy" })
+hl.animation({ leaf = "windowsIn", enabled = true, speed = 5, spring = "easy", style = "popin 87%" })
+hl.animation({ leaf = "windowsOut", enabled = true, speed = 2, bezier = "linear", style = "popin 87%" })
+hl.animation({ leaf = "workspaces", enabled = true, speed = 2.75, bezier = "easeOutCubic", style = "slide" })
+hl.animation({ leaf = "workspacesIn", enabled = true, speed = 1.75, bezier = "easeOutCubic", style = "slide" })
+hl.animation({ leaf = "workspacesOut", enabled = true, speed = 2.75, bezier = "easeOutCubic", style = "slide" })
+
 hl.on("hyprland.start", function()
     hl.exec_cmd(theme_restore)
     hl.exec_cmd("systemctl --user start waybar.service")
