@@ -5,11 +5,11 @@
 Use Hyprlock for PAM-backed session locking and Hypridle for idle detection:
 
 - `Super+L` locks immediately;
-- five idle minutes request a session lock;
-- ten idle minutes power off the displays;
-- input after display power-off enables them again;
+- five idle minutes request a session lock and power off the displays;
+- activity before suspend enables the displays again;
+- ten idle minutes suspend the machine;
+- waking from suspend keeps the session locked and enables the displays;
 - application idle inhibitors are respected;
-- suspend is deliberately not configured yet.
 
 The lock screen uses a solid Catppuccin Mocha background instead of a screenshot
 of the unlocked session. The repository contains presentation and timing only;
@@ -54,9 +54,18 @@ Validated in `arch-lab` on 2026-08-24:
 - Hypridle loaded both managed timeout rules: lock after five minutes and
   display power-off after ten minutes.
 
+## Physical validation
+
+Validated on the physical workstation on 2026-08-30:
+
+- the managed Hyprlock screen accepted the normal user password;
+- the policy was updated to lock and power off displays after five minutes and
+  suspend after ten minutes;
+- `hypridle.service` was enabled and started with the managed configuration.
+
 ## Deferred
 
-- Suspend and resume behavior.
+- Longer-term suspend and resume reliability across driver and kernel updates.
 - Laptop lid, battery, and backlight rules.
 - Wallpaper-backed or per-theme lock screens.
 - Fingerprint or hardware-token authentication.

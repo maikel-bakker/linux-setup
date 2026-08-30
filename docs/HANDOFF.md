@@ -37,8 +37,8 @@ Implemented inside the VM:
 - The managed Waybar configuration is now adapted from the MIT-licensed Athena
   design. Its Nerd Font glyphs, drawers, and controls are working in the lab.
 - Hyprlock authentication is validated, Hypridle is enabled and active with the
-  managed five-minute lock and ten-minute display timeout rules, and `Super+L`
-  is configured: see `docs/09-session-locking.md`.
+  managed five-minute lock/display-off and ten-minute suspend rules, and
+  `Super+L` is configured: see `docs/09-session-locking.md`.
 - Nautilus replaces Thunar as the selected graphical file manager and is bound
   to `Super+F`: see decision record 0011.
 - Rofi 2.0 replaces Fuzzel as the native Wayland application launcher on
