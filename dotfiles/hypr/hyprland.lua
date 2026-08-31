@@ -84,6 +84,8 @@ hl.bind(main_mod .. " + L", hl.dsp.exec_cmd("pidof hyprlock || hyprlock"))
 hl.bind(main_mod .. " + M", hl.dsp.exit())
 hl.bind(main_mod .. " + ESCAPE", hl.dsp.exec_cmd(power_menu))
 hl.bind("PRINT", hl.dsp.exec_cmd(screenshot))
+-- The Kensington KB435 screenshot key emits the Windows shortcut Super+Shift+S.
+hl.bind(main_mod .. " + SHIFT + S", hl.dsp.exec_cmd(screenshot))
 hl.bind(main_mod .. " + J", hl.dsp.layout("togglesplit"))
 
 hl.bind(main_mod .. " + left", hl.dsp.focus({ direction = "left" }))
