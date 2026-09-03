@@ -5,8 +5,11 @@ repository_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 source_file="$repository_root/dotfiles/hypr/hyprland.lua"
 target_directory="$HOME/.config/hypr"
 target_file="$target_directory/hyprland.lua"
+user_bin_directory="$HOME/.local/bin"
+volume_helper="$user_bin_directory/linux-setup-kensington-kb435-volume"
 
 mkdir -p "$target_directory"
+mkdir -p "$user_bin_directory"
 
 if [[ ! -L "$HOME/.config/linux-setup/theme" ]]; then
   "$repository_root/scripts/set-theme" --no-reload catppuccin-mocha
@@ -24,4 +27,5 @@ fi
 
 ln -sfn "$source_file" "$target_file"
 ln -sfn "$HOME/.config/linux-setup/theme/hyprland.lua" "$target_directory/theme.lua"
+ln -sfn "$repository_root/scripts/kensington-kb435-volume" "$volume_helper"
 printf 'Linked %s to the repository-managed Hyprland configuration.\n' "$target_file"

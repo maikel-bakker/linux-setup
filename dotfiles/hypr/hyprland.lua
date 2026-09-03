@@ -14,6 +14,7 @@ local theme_chooser = user_bin .. "linux-setup-theme-menu"
 local power_menu = user_bin .. "linux-setup-power-menu"
 local theme_restore = user_bin .. "linux-setup-theme-restore"
 local screenshot = user_bin .. "linux-setup-screenshot"
+local kensington_kb435_volume = user_bin .. "linux-setup-kensington-kb435-volume"
 
 hl.monitor({
     output = "",
@@ -87,6 +88,12 @@ hl.bind(main_mod .. " + ESCAPE", hl.dsp.exec_cmd(power_menu))
 hl.bind("PRINT", hl.dsp.exec_cmd(screenshot))
 -- The Kensington KB435 screenshot key emits the Windows shortcut Super+Shift+S.
 hl.bind(main_mod .. " + SHIFT + S", hl.dsp.exec_cmd(screenshot))
+hl.bind("XF86AudioLowerVolume",
+    hl.dsp.exec_cmd(kensington_kb435_volume .. " down"))
+hl.bind("XF86AudioRaiseVolume",
+    hl.dsp.exec_cmd(kensington_kb435_volume .. " up"))
+hl.bind("XF86AudioMute",
+    hl.dsp.exec_cmd(kensington_kb435_volume .. " mute"))
 hl.bind(main_mod .. " + J", hl.dsp.layout("togglesplit"))
 
 hl.bind(main_mod .. " + left", hl.dsp.focus({ direction = "left" }))
