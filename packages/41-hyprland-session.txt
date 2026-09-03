@@ -11,6 +11,7 @@ hypridle
 hyprpolkitagent
 xdg-desktop-portal-hyprland
 xdg-desktop-portal-gtk
+adw-gtk-theme
 xorg-xwayland
 qt5-wayland
 qt6-wayland

@@ -9,9 +9,13 @@ through `~/.config/linux-setup/theme`, which points to the active repository
 theme.
 
 Zed retains one editable settings file. It follows the system light/dark
-preference and auto-installs the Catppuccin theme and icon extensions. GTK 4
-applications such as Nautilus follow the same preference. Browser page content,
-websites, and account-specific browser themes remain outside this mechanism.
+preference and auto-installs the Catppuccin theme and icon extensions. GTK 3
+applications such as Blueman and GTK 4 applications such as Pavucontrol use the
+matching `adw-gtk3` variant supplied by Arch's `adw-gtk-theme` package. The
+active theme's `gtk-settings.ini` is linked as the settings file for both GTK
+versions. Libadwaita applications such as Nautilus follow the system color
+preference. Browser page content, websites, and account-specific browser themes
+remain outside this mechanism.
 
 The initial themes are:
 
@@ -39,8 +43,10 @@ linux-setup-theme-menu
 
 Rofi only provides the chooser. `scripts/set-theme` validates and atomically
 changes the active theme link, records its name under user state, updates the GTK
-color preference, applies an assigned wallpaper, and reloads running components
-where supported. The saved selection is restored whenever Hyprland starts.
+color preference and GTK theme, applies an assigned wallpaper, and reloads
+running components where supported. The saved selection is restored whenever
+Hyprland starts. Restart an already-running GTK application after changing
+themes so it rebuilds its interface with the selected variant.
 
 ## Scope and safety
 

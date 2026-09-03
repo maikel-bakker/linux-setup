@@ -22,6 +22,12 @@ Launch the graphical manager from Rofi or a terminal:
 blueman-manager
 ```
 
+Blueman is a GTK 3 application. The managed desktop theme selects
+`adw-gtk3-dark` for a dark theme such as Catppuccin Mocha and `adw-gtk3` for a
+light theme such as Catppuccin Latte. The same selection covers GTK 4 system
+utilities such as Pavucontrol. If an application was open while switching
+themes, close and reopen it to apply the new appearance.
+
 The package also provides `blueman-applet` for a persistent tray icon. The
 applet is not started automatically by the managed Hyprland configuration;
 launch it manually until its role in the session is validated.

@@ -49,6 +49,10 @@ link_managed_file "$HOME/.config/linux-setup/theme/hyprland.lua" \
   "$HOME/.config/hypr/theme.lua"
 link_managed_file "$HOME/.config/linux-setup/theme/hyprlock.conf" \
   "$HOME/.config/hypr/hyprlock-theme.conf"
+link_managed_file "$HOME/.config/linux-setup/theme/gtk-settings.ini" \
+  "$HOME/.config/gtk-3.0/settings.ini"
+link_managed_file "$HOME/.config/linux-setup/theme/gtk-settings.ini" \
+  "$HOME/.config/gtk-4.0/settings.ini"
 link_managed_file "$repository_root/dotfiles/hypr/hyprpaper.conf" \
   "$HOME/.config/hypr/hyprpaper.conf"
 link_managed_file "$repository_root/dotfiles/systemd/user/waybar.service" \

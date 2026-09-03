@@ -26,7 +26,7 @@ state_directory="${XDG_STATE_HOME:-$HOME/.local/state}/linux-setup"
 active_theme="$config_directory/theme"
 active_wallpaper="$config_directory/wallpaper"
 
-required_files=(mode hyprland.lua waybar.css kitty.conf rofi.rasi mako.conf hyprlock.conf)
+required_files=(mode gtk-settings.ini hyprland.lua waybar.css kitty.conf rofi.rasi mako.conf hyprlock.conf)
 if [[ ! -d "$theme_directory" ]]; then
   printf 'Unknown theme: %s\n' "$theme_name" >&2
   exit 1
@@ -66,8 +66,10 @@ printf '%s\n' "$theme_name" > "$state_directory/theme.name"
 if command -v gsettings > /dev/null; then
   if [[ "$theme_mode" == "dark" ]]; then
     gsettings set org.gnome.desktop.interface color-scheme prefer-dark
+    gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3-dark
   else
     gsettings set org.gnome.desktop.interface color-scheme default
+    gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3
   fi
 fi
 
